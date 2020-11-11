@@ -1,16 +1,25 @@
 package com.stu.otsea.properties;
 
+import com.stu.otsea.path.PathUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import redis.clients.jedis.JedisPoolConfig;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * @Author: 乌鸦坐飞机亠
+ * @CreateDate: 2020/11/11 20:27
+ * @Version: 1.0
+ * @Description:
+ */
 public class RedisProperties {
-    private static String PROPERTIES_LOCATION = "redis.properties";
-
+    private static final String PROPERTIES_LOCATION = PathUtil.getResourcePath("redis.properties");
+    private static final Logger logger = LoggerFactory.getLogger(RedisProperties.class);
+    private static final RedisProperties redisProperties = new RedisProperties();
     private Properties properties;
-    private static RedisProperties redisProperties = new RedisProperties();
 
     public static RedisProperties getInstance() {
         return redisProperties;
@@ -21,7 +30,7 @@ public class RedisProperties {
             properties = new Properties();
             properties.load(in);
         } catch (Exception e) {
-            System.out.println("error!! 加载redis配置文件失败");
+            logger.error("error!! 加载redis配置文件失败");
             e.printStackTrace();
         }
     }

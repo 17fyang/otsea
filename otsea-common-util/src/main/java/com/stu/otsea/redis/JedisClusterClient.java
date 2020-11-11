@@ -11,7 +11,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * redis集群的实现
+ * @Author: 乌鸦坐飞机亠
+ * @CreateDate: 2020/11/11 20:27
+ * @Version: 1.0
+ * @Description: redis集群的实现
+ * <p>
  * 1、当前实现是每个服务维护自己的redis client连接
  * 2、还有另一种实现方式是把redis集群连接作为一个服务，并暴露接口供别的服务调用
  * 本质上两种方式的区别是使用代理还是直连的区别，由于redis的快速响应特性，不适合代理访问的方式，所以这里用了直连

@@ -23,9 +23,10 @@
         <java.version>1.8</java.version>
     </properties>
 
+    <!-- 库版本声明，只声明版本，不下载jar包，jar包需要在子module中手动引入 -->
     <dependencyManagement>
         <dependencies>
-            <!-- 公共库依赖  -->
+            <!-- 本地库版本声明 -->
             <dependency>
                 <groupId>com.stu</groupId>
                 <artifactId>otsea-common-interface</artifactId>
@@ -41,6 +42,11 @@
                 <artifactId>otsea-common-dao</artifactId>
                 <version>${moduler-version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.stu</groupId>
+                <artifactId>otsea-common-util</artifactId>
+                <version>${moduler-version}</version>
+            </dependency>
 
             <!-- 日志处理 -->
             <dependency>
@@ -48,6 +54,20 @@
                 <artifactId>slf4j-log4j12</artifactId>
             </dependency>
 
+            <!-- junit测试 -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- jedis连接 -->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>2.9.1</version>
+            </dependency>
 
         </dependencies>
     </dependencyManagement>

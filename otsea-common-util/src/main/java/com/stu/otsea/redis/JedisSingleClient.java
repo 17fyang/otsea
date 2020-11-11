@@ -8,7 +8,10 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 
 /**
- * 单机版redis的实现
+ * @Author: 乌鸦坐飞机亠
+ * @CreateDate: 2020/11/11 20:27
+ * @Version: 1.0
+ * @Description: 单机版redis的实现
  */
 public class JedisSingleClient implements JedisClient {
     private static final Logger logger = LoggerFactory.getLogger(JedisSingleClient.class);
