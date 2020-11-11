@@ -30,6 +30,12 @@
             <artifactId>junit</artifactId>
         </dependency>
 
+        <!-- jackson -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+        </dependency>
+
     </dependencies>
     <artifactId>otsea-common-util</artifactId>
 
