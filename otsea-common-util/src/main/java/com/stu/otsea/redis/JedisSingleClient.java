@@ -27,33 +27,33 @@ public class JedisSingleClient implements JedisClient {
 
     @Override
     public String get(String key) {
-        Jedis resource = jedisPool.getResource();
-        String string = resource.get(key);
-        resource.close();
-        return string;
+        return this.safeRun((r) -> r.get(key));
     }
 
     @Override
     public String set(String key, String value) {
-        Jedis resource = jedisPool.getResource();
-        String string = resource.set(key, value);
-        resource.close();
-        return string;
+        return this.safeRun((r) -> r.set(key, value));
     }
-    
+
     @Override
     public long expire(String key, Integer second) {
-        Jedis resource = jedisPool.getResource();
-        Long expire = resource.expire(key, second);
-        resource.close();
-        return expire;
+        return this.safeRun((r) -> r.expire(key, second));
     }
 
     @Override
     public long del(String key) {
+        return this.safeRun((r) -> r.del(key));
+    }
+
+    private <T> T safeRun(SingleRun<T> func) {
         Jedis resource = jedisPool.getResource();
-        Long del = resource.del(key);
+        T result = func.run(resource);
         resource.close();
-        return del;
+        return result;
+    }
+
+    interface SingleRun<T> {
+        T run(Jedis resource);
     }
 }
+
