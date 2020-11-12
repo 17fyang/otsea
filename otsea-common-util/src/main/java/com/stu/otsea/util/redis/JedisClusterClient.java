@@ -1,6 +1,7 @@
-package com.stu.otsea.redis;
+package com.stu.otsea.util.redis;
 
-import com.stu.otsea.properties.RedisProperties;
+import com.stu.otsea.api.redis.JedisClient;
+import com.stu.otsea.util.properties.RedisProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.HostAndPort;

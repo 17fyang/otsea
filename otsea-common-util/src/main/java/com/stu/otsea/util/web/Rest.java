@@ -1,5 +1,11 @@
-package com.stu.otsea.web;
+package com.stu.otsea.util.web;
 
+/**
+ * @Author: 乌鸦坐飞机亠
+ * @CreateDate: 2020/11/12 10:01
+ * @Version: 1.0
+ * @Description: Restful格式返回封装类
+ */
 public class Rest<T> {
     private RestCode code;
     private String msg;
@@ -15,6 +21,10 @@ public class Rest<T> {
 
     public Rest(RestCode code, String msg, T data) {
         this.packRest(code, msg, data);
+    }
+
+    public static Rest<String> ok() {
+        return new Rest<>(RestCode.SUCCEED, "");
     }
 
     private void packRest(RestCode code, String msg, T data) {

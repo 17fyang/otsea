@@ -1,6 +1,6 @@
-package com.stu.otsea.properties;
+package com.stu.otsea.util.properties;
 
-import com.stu.otsea.path.PathUtil;
+import com.stu.otsea.util.path.PathUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.JedisPoolConfig;

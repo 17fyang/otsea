@@ -1,0 +1,22 @@
+mysql主从复制环境搭建
+
+1、正常启动两台mysql，配置上要注意的地方
+1.1、两台mysql配置上要有 server-id而且不一致
+# 设置server id
+server-id = 1
+
+1.2、master上的mysql要配置开启binlog日志
+# 开启binlog
+log-bin=mysql-bin
+# 设置binlog格式
+binlog_format=mixed
+
+2、开启后正常连接上sentinel mysql，执行以下语句指定master
+change master to master_host='127.0.0.1',master_port = 3310, master_user='root', master_password='123456',master_log_file='mysql-bin.000001', master_log_pos=0;
+
+3、然后start slave;
+
+4、注意事项
+4.1、start slave时主从数据库的数据需要一致，否则从数据库会复制失败停掉
+4.2、可以设定主数据库只复制某个数据库
+4.3、change master语句中的master_log_pos指的是binlog开始复制的位置

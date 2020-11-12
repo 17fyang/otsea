@@ -1,7 +1,13 @@
-package com.stu.otsea.web;
+package com.stu.otsea.util.web;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
+/**
+ * @Author: 乌鸦坐飞机亠
+ * @CreateDate: 2020/11/12 10:02
+ * @Version: 1.0
+ * @Description: restful状态码
+ */
 public enum RestCode {
     SUCCEED(200, "请求成功");
 

@@ -10,7 +10,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <version>${moduler-version}</version>
+    <version>1.0.0-SNAPSHOT</version>
     <artifactId>otsea-common-dao</artifactId>
 
 </project>

@@ -1,4 +1,4 @@
-package com.stu.otsea.test;
+package com.stu.otsea.util.test;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

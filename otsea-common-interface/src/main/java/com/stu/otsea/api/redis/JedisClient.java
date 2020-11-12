@@ -1,4 +1,4 @@
-package com.stu.otsea.redis;
+package com.stu.otsea.api.redis;
 
 public interface JedisClient {
 
