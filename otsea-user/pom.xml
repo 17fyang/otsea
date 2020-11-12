@@ -7,7 +7,6 @@
         <artifactId>otsea</artifactId>
         <groupId>com.stu</groupId>
         <version>1.0.0</version>
-        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <dependencies>
@@ -21,6 +20,11 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.stu</groupId>
+            <artifactId>otsea-common-util</artifactId>
         </dependency>
 
     </dependencies>

@@ -1,5 +1,7 @@
 package com.stu.otsea.util.user.controller;
 
+import com.stu.otsea.util.web.Rest;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -9,5 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description:
  */
 @RestController
+@RequestMapping("/otsea/user")
 public class UserController {
+    @RequestMapping("/login")
+    public Rest<String> login() {
+        return Rest.ok();
+    }
 }
