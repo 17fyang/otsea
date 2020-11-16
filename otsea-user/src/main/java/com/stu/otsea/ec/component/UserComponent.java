@@ -1,4 +1,4 @@
-package com.stu.otsea.util.user.component;
+package com.stu.otsea.ec.component;
 
 /**
  * @Author: 乌鸦坐飞机亠
@@ -7,5 +7,5 @@ package com.stu.otsea.util.user.component;
  * @Description:
  */
 public class UserComponent {
-    
+
 }

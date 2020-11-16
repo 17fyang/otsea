@@ -1,4 +1,4 @@
-package com.stu.otsea.util.user;
+package com.stu.otsea.user;
 
 
 import org.springframework.boot.SpringApplication;

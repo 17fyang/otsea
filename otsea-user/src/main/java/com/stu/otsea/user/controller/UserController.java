@@ -1,4 +1,4 @@
-package com.stu.otsea.util.user.controller;
+package com.stu.otsea.user.controller;
 
 import com.stu.otsea.util.web.Rest;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,4 +1,4 @@
-package com.stu.otsea.util.user.component;
+package com.stu.otsea.ec.component;
 
 public interface SerializableComponent<T extends Component> {
     T stringToComp(String s);

@@ -1,4 +1,4 @@
-package com.stu.otsea.util.user.service;
+package com.stu.otsea.user.service;
 
 /**
  * @Author: 乌鸦坐飞机亠
