@@ -6,6 +6,6 @@ package com.stu.otsea.ec.component;
  * @Version: 1.0
  * @Description:
  */
-public class Component {
-    protected String key;
+public abstract class Component {
+
 }
