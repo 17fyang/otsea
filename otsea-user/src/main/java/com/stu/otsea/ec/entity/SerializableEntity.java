@@ -31,7 +31,7 @@ public class SerializableEntity extends Entity implements Serializable<Serializa
                 Class<? extends Component> compClass = ComponentRegister.getComp(value);
                 if (compClass != null) {
                     Component comp = compClass.newInstance();
-                    Serializable serializableComp = (Serializable) compClass.newInstance();
+                    Serializable<Component> serializableComp = (Serializable) comp;
                     serializableComp.stringToObj(value);
                     this.getComponentMap().put(compClass, comp);
                 }
@@ -50,7 +50,7 @@ public class SerializableEntity extends Entity implements Serializable<Serializa
         for (Map.Entry<Class<? extends Component>, Component> entry : componentMap.entrySet()) {
             Component comp = entry.getValue();
             if (comp instanceof Serializable) {
-                Serializable<Component> serializableComp = (Serializable<Component>) comp;
+                Serializable serializableComp = (Serializable) comp;
                 String key = ComponentRegister.getKey(entry.getKey());
                 json.put(key, serializableComp.objToString());
             }
