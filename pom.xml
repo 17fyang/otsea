@@ -5,10 +5,11 @@
     <modules>
         <module>otsea-common-interface</module>
         <module>otsea-common-pojo</module>
-        <module>otsea-common-util</module>
+        <module>otsea-common-web</module>
         <module>otsea-common-dao</module>
         <module>otsea-user</module>
         <module>otsea-master</module>
+        <module>otsea-common-ec</module>
     </modules>
 
     <groupId>com.stu</groupId>
@@ -61,7 +62,12 @@
             </dependency>
             <dependency>
                 <groupId>com.stu</groupId>
-                <artifactId>otsea-common-util</artifactId>
+                <artifactId>otsea-common-web</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.stu</groupId>
+                <artifactId>otsea-common-ec</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
 
@@ -91,7 +97,7 @@
             <dependency>
                 <groupId>org.mongodb</groupId>
                 <artifactId>mongodb-driver</artifactId>
-                <version>3.2.2</version>
+                <version>3.6.4</version>
             </dependency>
 
             <!-- jackson -->

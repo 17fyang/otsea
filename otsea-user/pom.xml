@@ -22,15 +22,28 @@
             <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
         </dependency>
 
+        <!-- 本地util模块 -->
         <dependency>
             <groupId>com.stu</groupId>
-            <artifactId>otsea-common-util</artifactId>
+            <artifactId>otsea-common-web</artifactId>
         </dependency>
 
         <!-- fastJson -->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
+        </dependency>
+
+        <!-- 本地ec模块 -->
+        <dependency>
+            <groupId>com.stu</groupId>
+            <artifactId>otsea-common-ec</artifactId>
+        </dependency>
+
+        <!-- 本地dao模块-->
+        <dependency>
+            <groupId>com.stu</groupId>
+            <artifactId>otsea-common-dao</artifactId>
         </dependency>
 
     </dependencies>
