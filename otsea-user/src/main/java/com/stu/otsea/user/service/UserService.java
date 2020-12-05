@@ -23,7 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Component
 public class UserService {
-    private Map<String, User> idMap = new ConcurrentHashMap<>();
+    private final Map<String, User> idMap = new ConcurrentHashMap<>();
 
     @Autowired
     private UserMongoDao userMongoDao;
