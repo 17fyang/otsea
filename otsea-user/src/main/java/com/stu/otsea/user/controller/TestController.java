@@ -33,6 +33,7 @@ public class TestController {
             for (Map.Entry<String, Object> entry : doc.entrySet()) {
                 System.out.println(entry.getKey() + " : " + entry.getValue());
             }
+
             System.out.println();
         }
         return Rest.ok();
