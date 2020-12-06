@@ -22,7 +22,7 @@ import java.util.Map;
 public class TestController {
 
 
-    //这个注释是用来测试jenkins的
+    //this is for 测试jenkins的
     @Resource(name = "MongoPool")
     private MongoClient mongoClient;
 
