@@ -21,6 +21,8 @@ import java.util.Map;
 @RequestMapping("/otsea/test")
 public class TestController {
 
+
+    //这个注释是用来测试jenkins的
     @Resource(name = "MongoPool")
     private MongoClient mongoClient;
 
