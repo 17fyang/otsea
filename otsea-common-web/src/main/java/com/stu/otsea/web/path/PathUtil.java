@@ -1,7 +1,5 @@
 package com.stu.otsea.web.path;
 
-import java.io.File;
-
 /**
  * @Author: 乌鸦坐飞机亠
  * @CreateDate: 2020/11/11 20:27
@@ -12,7 +10,7 @@ public class PathUtil {
     public static final String RESOURCE_ROOT;
 
     static {
-        RESOURCE_ROOT = new File("").getAbsolutePath() + "\\target\\classes\\";
+        RESOURCE_ROOT = "E:\\IDEA\\workSpace\\otsea\\otsea-common-web\\target\\classes\\";
     }
 
     /**

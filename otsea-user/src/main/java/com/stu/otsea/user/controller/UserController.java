@@ -1,6 +1,6 @@
 package com.stu.otsea.user.controller;
 
-import com.stu.otsea.ec.component.UserComponent;
+import com.stu.otsea.ec.component.handle.RestOutputHandle;
 import com.stu.otsea.user.service.UserService;
 import com.stu.otsea.web.rest.Rest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +21,17 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("/login")
-    public Rest<UserComponent> login(String mail, String password) throws InstantiationException, IllegalAccessException {
+    public Rest<RestOutputHandle> login(String mail, String password) throws InstantiationException, IllegalAccessException {
         return userService.login(mail, password);
     }
 
     @RequestMapping("/register")
-    public Rest<String> register(String mail, String password) throws IllegalAccessException, InstantiationException {
-        return userService.register(mail, password);
+    public Rest<String> register(String mail, String password, String verificationCode) throws IllegalAccessException, InstantiationException {
+        return userService.register(mail, password, verificationCode);
     }
 
+    @RequestMapping("/verification")
+    public Rest<String> verification(String mail) {
+        return userService.verification(mail);
+    }
 }

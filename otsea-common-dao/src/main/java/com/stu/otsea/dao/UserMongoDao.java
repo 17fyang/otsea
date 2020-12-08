@@ -4,7 +4,6 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
 import com.stu.otsea.ec.entity.User;
-import com.stu.otsea.ec.enumreation.UserEnum;
 import com.stu.otsea.web.mongoDB.MongoClient;
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -21,7 +20,7 @@ public class UserMongoDao {
     private MongoClient mongoClient;
 
     public User selectOneByMail(String mail) throws InstantiationException, IllegalAccessException {
-        Bson mailFilter = Filters.eq(UserEnum.MAIL, mail);
+        Bson mailFilter = Filters.eq("mail", mail);
         FindIterable<Document> rs = mongoClient.find(DB_NAME, COLLECTION_NAME, mailFilter);
         MongoCursor<Document> it = rs.iterator();
         if (!it.hasNext()) return null;

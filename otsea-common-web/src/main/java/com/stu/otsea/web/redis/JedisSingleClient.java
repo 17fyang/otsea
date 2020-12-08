@@ -23,7 +23,8 @@ public class JedisSingleClient implements JedisClient {
         int port = RedisProperties.getInstance().getPoolPort();
         int timeout = RedisProperties.getInstance().getTimeout();
         String password = RedisProperties.getInstance().getPassword();
-        jedisPool = new JedisPool(config, host, port, timeout, password);
+        jedisPool = new JedisPool(config, host, port);
+//        jedisPool = new JedisPool(config, host, port, timeout, password);
 
         logger.info("redis single client init finish !!");
     }

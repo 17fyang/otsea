@@ -25,6 +25,7 @@ public class GlobalExceptionHandle {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public Rest<String> handleUnknownException(HttpServletRequest req, Exception e) {
+        e.printStackTrace();
         return new Rest<>(RestCode.UNKNOWN, null);
     }
 

@@ -3,7 +3,7 @@ package com.stu.otsea.ec.component;
 import com.alibaba.fastjson.JSONObject;
 import com.stu.otsea.ec.common.InitializeComp;
 import com.stu.otsea.ec.component.abstractComp.OutputComponent;
-import com.stu.otsea.ec.enumreation.UserEnum;
+import com.stu.otsea.ec.enumreation.SexEnum;
 
 /**
  * @Author: 乌鸦坐飞机亠
@@ -13,15 +13,17 @@ import com.stu.otsea.ec.enumreation.UserEnum;
  */
 public class UserComponent extends OutputComponent implements InitializeComp {
     private String name;
+    private SexEnum sex;
     private String signature;
     private String headImage;
 
     @Override
     public void stringToObj(String s) {
         JSONObject json = JSONObject.parseObject(s);
-        this.name = json.getString(UserEnum.NAME);
-        this.signature = json.getString(UserEnum.SIGNATURE);
-        this.headImage = json.getString(UserEnum.HEAD_IMAGE);
+        this.name = json.getString("name");
+        this.sex = SexEnum.valueOfSex(json.getString("sex"));
+        this.signature = json.getString("signature");
+        this.headImage = json.getString("headImage");
     }
 
     @Override
