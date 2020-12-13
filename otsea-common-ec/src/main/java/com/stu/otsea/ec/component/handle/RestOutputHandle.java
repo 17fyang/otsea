@@ -22,7 +22,6 @@ public class RestOutputHandle {
 
     @JsonValue
     public JSONObject toJSONObject() {
-        System.out.println("dsaodjasdjsoijd");
         JSONObject json = new JSONObject();
         for (OutputComponent component : components) {
             String key = ComponentRegister.getKey(component.getClass());

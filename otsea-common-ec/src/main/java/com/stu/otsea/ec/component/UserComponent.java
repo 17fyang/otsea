@@ -28,7 +28,8 @@ public class UserComponent extends OutputComponent implements InitializeComp {
 
     @Override
     public String objToString() {
-        return JSONObject.toJSON(this).toString();
+        JSONObject json = (JSONObject) JSONObject.toJSON(this);
+        return json.toJSONString();
     }
 
     @Override
