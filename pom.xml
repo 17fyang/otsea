@@ -10,7 +10,6 @@
         <module>otsea-user</module>
         <module>otsea-master</module>
         <module>otsea-common-ec</module>
-        <module>otsea-common-domain</module>
     </modules>
 
     <groupId>com.stu</groupId>
