@@ -20,8 +20,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("/otsea/test")
 public class TestController {
-    
-    //this is for 测试jenkins的
+
+    //this is for 测试jenkins2的
     @Resource(name = "MongoPool")
     private MongoClient mongoClient;
 
