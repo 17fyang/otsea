@@ -1,5 +1,7 @@
 package com.stu.otsea.web.path;
 
+import java.io.File;
+
 /**
  * @Author: 乌鸦坐飞机亠
  * @CreateDate: 2020/11/11 20:27
@@ -10,7 +12,8 @@ public class PathUtil {
     public static final String RESOURCE_ROOT;
 
     static {
-        RESOURCE_ROOT = "E:\\IDEA\\workSpace\\otsea\\otsea-common-web\\target\\classes\\";
+        RESOURCE_ROOT = new File("config").getAbsolutePath() + "\\";
+        System.out.println("locate config resource location:" + RESOURCE_ROOT);
     }
 
     /**
@@ -24,7 +27,7 @@ public class PathUtil {
     }
 
     /**
-     * 获取resource文件夹根路径
+     * 获取配置文件夹根路径
      *
      * @return 根路径
      */
