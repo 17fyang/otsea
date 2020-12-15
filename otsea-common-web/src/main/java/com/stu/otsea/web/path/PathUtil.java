@@ -1,7 +1,5 @@
 package com.stu.otsea.web.path;
 
-import java.io.File;
-
 /**
  * @Author: 乌鸦坐飞机亠
  * @CreateDate: 2020/11/11 20:27
@@ -12,7 +10,8 @@ public class PathUtil {
     public static final String RESOURCE_ROOT;
 
     static {
-        RESOURCE_ROOT = new File("config").getAbsolutePath() + "\\";
+        String itemLocation = System.getProperty("user.dir");
+        RESOURCE_ROOT = itemLocation + "/config";
         System.out.println("locate config resource location:" + RESOURCE_ROOT);
     }
 
@@ -23,7 +22,7 @@ public class PathUtil {
      * @return 绝对路径
      */
     public static String getResourcePath(String resourceName) {
-        return RESOURCE_ROOT + resourceName;
+        return RESOURCE_ROOT + "/" + resourceName;
     }
 
     /**
