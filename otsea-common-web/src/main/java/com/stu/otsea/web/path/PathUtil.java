@@ -1,5 +1,7 @@
 package com.stu.otsea.web.path;
 
+import java.io.File;
+
 /**
  * @Author: 乌鸦坐飞机亠
  * @CreateDate: 2020/11/11 20:27
@@ -10,8 +12,14 @@ public class PathUtil {
     public static final String RESOURCE_ROOT;
 
     static {
-        String itemLocation = System.getProperty("user.dir");
-        RESOURCE_ROOT = itemLocation + "/config";
+        if ("\\".equals(File.separator)) {
+            // 如果是windows系统则使用项目根目录的配置
+            String itemLocation = System.getProperty("user.dir");
+            RESOURCE_ROOT = itemLocation + "/config";
+        } else {
+            //如果是linux系统则使用指定位置的配置
+            RESOURCE_ROOT = "/software/workSpace/otsea/config";
+        }
         System.out.println("locate config resource location:" + RESOURCE_ROOT);
     }
 
