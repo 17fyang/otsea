@@ -143,6 +143,16 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+
+            <!-- spring boot 打包插件 -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <executable>true</executable>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 
