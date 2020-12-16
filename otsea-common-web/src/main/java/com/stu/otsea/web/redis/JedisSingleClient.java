@@ -1,6 +1,7 @@
 package com.stu.otsea.web.redis;
 
-import com.stu.otsea.web.properties.RedisProperties;
+import com.stu.otsea.web.util.ConfigUtil;
+import com.stu.otsea.web.util.PathUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
@@ -18,11 +19,15 @@ public class JedisSingleClient implements JedisClient {
     private JedisPool jedisPool;
 
     public JedisSingleClient() {
-        JedisPoolConfig config = RedisProperties.getInstance().getPoolConfig();
-        String host = RedisProperties.getInstance().getPoolHost();
-        int port = RedisProperties.getInstance().getPoolPort();
-        int timeout = RedisProperties.getInstance().getTimeout();
-        String password = RedisProperties.getInstance().getPassword();
+        ConfigUtil configUtil = new ConfigUtil(PathUtil.getResourcePath("redis.properties"));
+
+        JedisPoolConfig config = new JedisPoolConfig();
+        config.setMaxIdle(configUtil.getInt("redis.min.idle"));
+        config.setMaxIdle(configUtil.getInt("redis.max.idle"));
+        String host = configUtil.getString("redis.pool.host");
+        int port = configUtil.getInt("redis.pool.port");
+        int timeout = configUtil.getInt("redis.timeout");
+        String password = configUtil.getString("redis.password");
         jedisPool = new JedisPool(config, host, port);
 //        jedisPool = new JedisPool(config, host, port, timeout, password);
 

@@ -4,7 +4,7 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.model.Filters;
 import com.stu.otsea.ec.entity.User;
-import com.stu.otsea.web.mongoDB.MongoClient;
+import com.stu.otsea.web.mongoDB.IMongoClient;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.springframework.stereotype.Component;
@@ -17,7 +17,7 @@ public class UserMongoDao {
     public static final String COLLECTION_NAME = "user";
 
     @Resource(name = "MongoPool")
-    private MongoClient mongoClient;
+    private IMongoClient mongoClient;
 
     public User selectOneByMail(String mail) throws InstantiationException, IllegalAccessException {
         Bson mailFilter = Filters.eq("mail", mail);

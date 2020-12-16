@@ -1,4 +1,4 @@
-package com.stu.otsea.web.path;
+package com.stu.otsea.web.util;
 
 import java.io.File;
 

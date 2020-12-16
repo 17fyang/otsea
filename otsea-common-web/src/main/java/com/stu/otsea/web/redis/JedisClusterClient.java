@@ -1,6 +1,7 @@
 package com.stu.otsea.web.redis;
 
-import com.stu.otsea.web.properties.RedisProperties;
+import com.stu.otsea.web.util.ConfigUtil;
+import com.stu.otsea.web.util.PathUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.HostAndPort;
@@ -27,12 +28,16 @@ public class JedisClusterClient implements JedisClient {
     private JedisCluster jedisCluster;
 
     public JedisClusterClient() {
-        String clusterNodesConfig = RedisProperties.getInstance().getRedisCluster();
-        int timeout = RedisProperties.getInstance().getTimeout();
-        int maxAttempts = RedisProperties.getInstance().getMaxAttempts();
-        int soTimeout = RedisProperties.getInstance().getSoTimeout();
-        JedisPoolConfig config = RedisProperties.getInstance().getPoolConfig();
-        String password = RedisProperties.getInstance().getPassword();
+        ConfigUtil configUtil = new ConfigUtil(PathUtil.getResourcePath("redis.properties"));
+
+        String clusterNodesConfig = configUtil.getString("redis.cluster");
+        String password = configUtil.getString("redis.password");
+        int timeout = configUtil.getInt("redis.timeout");
+        int maxAttempts = configUtil.getInt("redis.max.attempts");
+        int soTimeout = configUtil.getInt("redis.soTimeout");
+        JedisPoolConfig config = new JedisPoolConfig();
+        config.setMaxIdle(configUtil.getInt("redis.min.idle"));
+        config.setMaxIdle(configUtil.getInt("redis.max.idle"));
 
         Set<HostAndPort> instanceSet = new HashSet<>();
         for (String node : clusterNodesConfig.split(";")) {

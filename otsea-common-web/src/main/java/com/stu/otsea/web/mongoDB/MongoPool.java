@@ -1,5 +1,6 @@
 package com.stu.otsea.web.mongoDB;
 
+import com.mongodb.MongoClient;
 import com.mongodb.MongoClientOptions;
 import com.mongodb.ServerAddress;
 import com.mongodb.client.FindIterable;
@@ -7,29 +8,36 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
+import com.stu.otsea.web.util.ConfigUtil;
+import com.stu.otsea.web.util.PathUtil;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.springframework.stereotype.Component;
 
 @Component("MongoPool")
-public class MongoPool implements MongoClient {
-    public static final String IP = "127.0.0.1";
-    public static final int PORT = 27017;
-
-    private com.mongodb.MongoClient mongoClient = null;
+public class MongoPool implements IMongoClient {
+    private MongoClient mongoClient = null;
 
     private MongoPool() {
-        MongoClientOptions.Builder buide = new MongoClientOptions.Builder();
-        buide.connectionsPerHost(10);// 与目标数据库可以建立的最大链接数
-        buide.connectTimeout(1000 * 60 * 20);// 与数据库建立链接的超时时间
-        buide.maxWaitTime(100 * 60 * 5);// 一个线程成功获取到一个可用数据库之前的最大等待时间
-        buide.threadsAllowedToBlockForConnectionMultiplier(100);
-        buide.maxConnectionIdleTime(0);
-        buide.maxConnectionLifeTime(0);
-        buide.socketTimeout(0);
-        buide.socketKeepAlive(true);
-        MongoClientOptions myOptions = buide.build();
-        mongoClient = new com.mongodb.MongoClient(new ServerAddress(IP, PORT), myOptions);
+        ConfigUtil configUtil = new ConfigUtil(PathUtil.getResourcePath("mongodb.properties"));
+        String host = configUtil.getString("mongo.host");
+        int port = configUtil.getInt("mongo.port");
+        int maxConn = configUtil.getInt("mongo.connect.maxNum");
+        int connectTimeout = configUtil.getInt("mongo.connect.timeout");
+        int maxWait = configUtil.getInt("mongo.wait.max");
+        int waitThread = configUtil.getInt("mongo.wait.num");
+
+        MongoClientOptions.Builder builder = new MongoClientOptions.Builder();
+        builder.connectionsPerHost(maxConn);
+        builder.connectTimeout(connectTimeout);
+        builder.maxWaitTime(maxWait);
+        builder.threadsAllowedToBlockForConnectionMultiplier(waitThread);
+        builder.maxConnectionIdleTime(0);
+        builder.maxConnectionLifeTime(0);
+        builder.socketTimeout(0);
+        builder.socketKeepAlive(true);
+        MongoClientOptions myOptions = builder.build();
+        mongoClient = new com.mongodb.MongoClient(new ServerAddress(host, port), myOptions);
     }
 
 

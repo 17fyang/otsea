@@ -6,7 +6,7 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
-public interface MongoClient {
+public interface IMongoClient {
     MongoDatabase getDb(String dbName);
 
     MongoCollection<Document> getCollection(String dbName, String collectionName);
