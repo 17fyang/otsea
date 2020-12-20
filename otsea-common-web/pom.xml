@@ -26,6 +26,12 @@
             <artifactId>otsea-common-interface</artifactId>
         </dependency>
 
+        <!-- fastJson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+
         <!-- junit测试 -->
         <dependency>
             <groupId>junit</groupId>

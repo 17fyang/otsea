@@ -1,8 +1,10 @@
 package com.stu.otsea.ec.component.handle;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.stu.otsea.ec.component.abstractComp.Component;
+import com.stu.otsea.web.util.JsonUtil;
 
 /**
  * @author: 乌鸦坐飞机亠
@@ -21,12 +23,15 @@ public class RestOutputHandle {
     }
 
     @JsonValue
-    public String toJSONObject() {
+    public JSONObject toJSONObject() {
         JSONObject json = new JSONObject();
         for (Component component : components) {
             String key = ComponentRegister.getKey(component.getClass());
-            json.put(key, component.toString());
+            
+            JSON compJson = JsonUtil.safeParse(component.toString());
+            if (compJson == null) json.put(key, component.toString());
+            else json.put(key, compJson);
         }
-        return json.toJSONString();
+        return json;
     }
 }

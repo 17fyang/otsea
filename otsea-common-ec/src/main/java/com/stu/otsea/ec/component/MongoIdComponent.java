@@ -20,4 +20,9 @@ public class MongoIdComponent extends Component implements ReadableComp {
     public String get_id() {
         return _id;
     }
+
+    @Override
+    public String toString() {
+        return _id;
+    }
 }
