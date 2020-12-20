@@ -2,7 +2,7 @@ package com.stu.otsea.ec.component.handle;
 
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonValue;
-import com.stu.otsea.ec.component.abstractComp.OutputComponent;
+import com.stu.otsea.ec.component.abstractComp.Component;
 
 /**
  * @author: 乌鸦坐飞机亠
@@ -10,24 +10,23 @@ import com.stu.otsea.ec.component.abstractComp.OutputComponent;
  * @Description:
  */
 public class RestOutputHandle {
-    private OutputComponent[] components;
+    private Component[] components;
 
-    RestOutputHandle(OutputComponent[] components) {
+    RestOutputHandle(Component[] components) {
         this.components = components;
     }
 
-    public static RestOutputHandle pack(OutputComponent... components) {
+    public static RestOutputHandle pack(Component... components) {
         return new RestOutputHandle(components);
     }
 
     @JsonValue
-    public JSONObject toJSONObject() {
+    public String toJSONObject() {
         JSONObject json = new JSONObject();
-        for (OutputComponent component : components) {
+        for (Component component : components) {
             String key = ComponentRegister.getKey(component.getClass());
-            System.out.println(key);
             json.put(key, component.toString());
         }
-        return json;
+        return json.toJSONString();
     }
 }

@@ -49,7 +49,7 @@ public class UserService {
         this.idMap.put(idComponent.get_id(), user);
 
         UserComponent userComp = HandleEnum.USER_HANDLE.bindComponent(user);
-        return new Rest<>(RestOutputHandle.pack(userComp));
+        return new Rest<>(RestOutputHandle.pack(idComponent, userComp));
     }
 
     public Rest<String> register(String mail, String password, String verificationCode) throws InstantiationException, IllegalAccessException {
