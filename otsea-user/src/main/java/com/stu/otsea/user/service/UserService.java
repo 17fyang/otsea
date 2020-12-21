@@ -79,7 +79,7 @@ public class UserService {
         if (!StringUtils.isEmpty(oldCode)) throw new HintException("验证码尚在有效期内");
 
         String verificationCode = String.valueOf((int) (Math.random() * 900000) + 100000);
-        //todo 发邮件
+        //todo 发邮件，redis设置有效期
         System.out.println("验证码：" + verificationCode);
 
         jedisClient.set(redisKey, verificationCode);
