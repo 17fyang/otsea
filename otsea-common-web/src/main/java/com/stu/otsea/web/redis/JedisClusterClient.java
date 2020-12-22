@@ -23,7 +23,7 @@ import java.util.Set;
  * 但是使用了直连会变得繁琐许多，像需要手动写properties，每个服务如果需要用到redis要手动把redis实例添加到bean中去
  * 如果服务数量过多的话可能会让redis连接数过多
  */
-public class JedisClusterClient implements JedisClient {
+public class JedisClusterClient implements IJedisClient {
     private static final Logger logger = LoggerFactory.getLogger(JedisClusterClient.class);
     private JedisCluster jedisCluster;
 

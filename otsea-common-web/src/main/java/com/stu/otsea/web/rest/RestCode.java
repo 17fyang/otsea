@@ -14,7 +14,8 @@ public enum RestCode {
     UNKNOWN(500, "未知错误"),
     DATA_FORMAT_EXCEPTION(511, "数据格式不符合规范！"),
     DATA_CONTENT_EXCEPTION(510, "数据内容有误！"),
-    STATUS_EXCEPTION(520, "状态异常！");
+    STATUS_EXCEPTION(520, "状态异常！"),
+    METHOD_NO_SUPPORT(530, "不支持该method");
 
 
     private final int code;

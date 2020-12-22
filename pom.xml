@@ -44,6 +44,21 @@
                 <scope>import</scope>
             </dependency>
 
+            <!-- spring redis -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
+            <!-- springboot 配置 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-configuration-processor</artifactId>
+                <version>${spring-boot.version}</version>
+                <optional>true</optional>
+            </dependency>
+
             <!-- 本地库版本声明 -->
             <dependency>
                 <groupId>com.stu</groupId>

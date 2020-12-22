@@ -14,7 +14,7 @@ import redis.clients.jedis.JedisPoolConfig;
  * @Version: 1.0
  * @Description: 单机版redis的实现
  */
-public class JedisSingleClient implements JedisClient {
+public class JedisSingleClient implements IJedisClient {
     private static final Logger logger = LoggerFactory.getLogger(JedisSingleClient.class);
     private JedisPool jedisPool;
 

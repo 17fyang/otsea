@@ -1,6 +1,6 @@
 package com.stu.otsea.web.redis;
 
-public interface JedisClient {
+public interface IJedisClient {
 
     String get(String key);
 

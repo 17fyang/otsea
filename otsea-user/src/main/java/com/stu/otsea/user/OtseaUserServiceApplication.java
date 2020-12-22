@@ -1,7 +1,7 @@
 package com.stu.otsea.user;
 
 
-import com.stu.otsea.web.redis.JedisClient;
+import com.stu.otsea.web.redis.IJedisClient;
 import com.stu.otsea.web.redis.JedisSingleClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,7 +27,7 @@ public class OtseaUserServiceApplication {
      * 手动声明Jedis bean
      */
     @Bean
-    public JedisClient jedisClient() {
+    public IJedisClient jedisClient() {
         return new JedisSingleClient();
 //        return new JedisClusterClient();
     }

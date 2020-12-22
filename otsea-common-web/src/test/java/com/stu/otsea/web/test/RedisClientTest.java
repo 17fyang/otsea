@@ -1,6 +1,6 @@
 package com.stu.otsea.web.test;
 
-import com.stu.otsea.web.redis.JedisClient;
+import com.stu.otsea.web.redis.IJedisClient;
 import com.stu.otsea.web.redis.JedisSingleClient;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -21,7 +21,7 @@ public class RedisClientTest {
 
     @Ignore
     public void jedisSingleTest() {
-        JedisClient singleClient = new JedisSingleClient();
+        IJedisClient singleClient = new JedisSingleClient();
         String testKey = "testKey";
         String testValue = "testValue";
         singleClient.set(testKey, testValue);

@@ -11,9 +11,9 @@ import com.stu.otsea.ec.entity.User;
 import com.stu.otsea.web.exception.DataContentException;
 import com.stu.otsea.web.exception.HintException;
 import com.stu.otsea.web.exception.StatusException;
-import com.stu.otsea.web.redis.JedisClient;
 import com.stu.otsea.web.rest.Rest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -28,14 +28,15 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Component
 public class UserService {
-    public static final String VERIFICATION_REDIS_KEY = "verify:%s";
-    private final Map<String, User> idMap = new ConcurrentHashMap<>();
-
     @Autowired
     private UserMongoDao userMongoDao;
 
     @Autowired
-    private JedisClient jedisClient;
+    private RedisTemplate<String, String> redisTemplate;
+
+
+    public static final String VERIFICATION_REDIS_KEY = "verify:%s";
+    private final Map<String, User> idMap = new ConcurrentHashMap<>();
 
     public Rest<RestOutputHandle> login(String mail, String password) throws IllegalAccessException, InstantiationException {
         User user = userMongoDao.selectOneByMail(mail);
@@ -53,7 +54,7 @@ public class UserService {
     }
 
     public Rest<String> register(String mail, String password, String verificationCode) throws InstantiationException, IllegalAccessException {
-        String serverCode = jedisClient.get(String.format(VERIFICATION_REDIS_KEY, mail));
+        String serverCode = redisTemplate.opsForValue().get(String.format(VERIFICATION_REDIS_KEY, mail));
         if (StringUtils.isEmpty(serverCode)) throw new StatusException("验证码已过期");
         if (!serverCode.equals(verificationCode)) throw new DataContentException("验证码不正确");
 
@@ -75,14 +76,14 @@ public class UserService {
 
     public Rest<String> verification(String mail) {
         String redisKey = String.format(VERIFICATION_REDIS_KEY, mail);
-        String oldCode = jedisClient.get(redisKey);
+        String oldCode = redisTemplate.opsForValue().get(redisKey);
         if (!StringUtils.isEmpty(oldCode)) throw new HintException("验证码尚在有效期内");
 
         String verificationCode = String.valueOf((int) (Math.random() * 900000) + 100000);
         //todo 发邮件，redis设置有效期
         System.out.println("验证码：" + verificationCode);
 
-        jedisClient.set(redisKey, verificationCode);
+        redisTemplate.opsForValue().set(redisKey, verificationCode);
         return Rest.ok();
     }
 

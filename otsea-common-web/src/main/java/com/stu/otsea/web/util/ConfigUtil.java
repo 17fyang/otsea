@@ -43,6 +43,7 @@ public class ConfigUtil {
      * @return
      */
     public int getInt(String key) {
+//        System.out.println("run get int by key " + key);
         return Integer.parseInt(properties.getProperty(key));
     }
 

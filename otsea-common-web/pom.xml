@@ -26,6 +26,13 @@
             <artifactId>otsea-common-interface</artifactId>
         </dependency>
 
+        <!-- springboot 配置 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
         <!-- fastJson -->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -60,6 +67,12 @@
         <dependency>
             <groupId>com.spring4all</groupId>
             <artifactId>swagger-spring-boot-starter</artifactId>
+        </dependency>
+
+        <!-- spring redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
 
