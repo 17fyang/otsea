@@ -52,12 +52,11 @@
                 <version>${spring-boot.version}</version>
             </dependency>
 
-            <!-- springboot 配置 -->
+            <!--springboot aop-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-configuration-processor</artifactId>
+                <artifactId>spring-boot-starter-aop</artifactId>
                 <version>${spring-boot.version}</version>
-                <optional>true</optional>
             </dependency>
 
             <!-- 本地库版本声明 -->
@@ -159,6 +158,13 @@
                 <groupId>com.spring4all</groupId>
                 <artifactId>swagger-spring-boot-starter</artifactId>
                 <version>1.7.0.RELEASE</version>
+            </dependency>
+
+            <!-- auth0 jwt规范库 -->
+            <dependency>
+                <groupId>com.auth0</groupId>
+                <artifactId>java-jwt</artifactId>
+                <version>3.4.0</version>
             </dependency>
 
 

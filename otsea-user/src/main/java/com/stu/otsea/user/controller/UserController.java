@@ -2,6 +2,7 @@ package com.stu.otsea.user.controller;
 
 import com.stu.otsea.ec.component.handle.RestOutputHandle;
 import com.stu.otsea.user.service.UserService;
+import com.stu.otsea.web.aop.Token;
 import com.stu.otsea.web.rest.Rest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -24,6 +25,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Token
     @ApiOperation(value = "登录接口")
     @RequestMapping("/login")
     public Rest<RestOutputHandle> login(String mail, String password) throws InstantiationException, IllegalAccessException {

@@ -17,9 +17,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-
 /**
  * @Author: 乌鸦坐飞机亠
  * @CreateDate: 2020/11/12 14:14
@@ -37,9 +34,7 @@ public class UserService {
     @Autowired
     private RedisTemplate<String, User> userRedisTemplate;
 
-
     public static final String VERIFICATION_REDIS_KEY = "verify:%s";
-    private final Map<String, User> idMap = new ConcurrentHashMap<>();
 
     public Rest<RestOutputHandle> login(String mail, String password) throws IllegalAccessException, InstantiationException {
         User user = userMongoDao.selectOneByMail(mail);
@@ -49,8 +44,11 @@ public class UserService {
         if (passwordComponent == null || !passwordComponent.getPassword().equals(password))
             throw new DataContentException("密码错误，请重新输入！");
 
+        //设置对象redis缓存
         MongoIdComponent idComponent = HandleEnum.MONGO_ID_HANDLE.bindComponent(user);
-        this.idMap.put(idComponent.get_id(), user);
+        this.userRedisTemplate.opsForValue().set(idComponent.get_id(), user);
+
+        //todo 签发token
 
         UserComponent userComp = HandleEnum.USER_HANDLE.bindComponent(user);
         return new Rest<>(RestOutputHandle.pack(idComponent, userComp));
@@ -87,9 +85,5 @@ public class UserService {
 
         redisTemplate.opsForValue().set(redisKey, verificationCode);
         return Rest.ok();
-    }
-
-    public User getUserCacheById(String id) {
-        return this.idMap.get(id);
     }
 }
