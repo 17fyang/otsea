@@ -28,13 +28,13 @@ public class UserController {
     @Token
     @ApiOperation(value = "登录接口")
     @RequestMapping("/login")
-    public Rest<RestOutputHandle> login(String mail, String password) throws InstantiationException, IllegalAccessException {
+    public Rest<RestOutputHandle> login(String mail, String password) {
         return userService.login(mail, password);
     }
 
     @ApiOperation(value = "注册接口")
     @RequestMapping("/register")
-    public Rest<String> register(String mail, String password, String verificationCode) throws IllegalAccessException, InstantiationException {
+    public Rest<String> register(String mail, String password, String verificationCode) {
         return userService.register(mail, password, verificationCode);
     }
 

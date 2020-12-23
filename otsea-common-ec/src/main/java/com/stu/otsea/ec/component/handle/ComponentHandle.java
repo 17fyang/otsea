@@ -49,14 +49,18 @@ public class ComponentHandle<T extends Component> {
      * @throws IllegalAccessException
      * @throws InstantiationException
      */
-    public T bindComponent(Entity entity) throws IllegalAccessException, InstantiationException {
+    public T bindComponent(Entity entity) {
         Component comp = entity.getComponentMap().get(this.compClass);
-
         if (comp != null) return (T) comp;
-
-        T compInstance = compClass.newInstance();
-        entity.getComponentMap().put(this.compClass, compInstance);
-        return compInstance;
+        T compInstance = null;
+        try {
+            compInstance = compClass.newInstance();
+            entity.getComponentMap().put(this.compClass, compInstance);
+            return compInstance;
+        } catch (ReflectiveOperationException e) {
+            e.printStackTrace();
+            throw new RuntimeException("fail to new component instance!");
+        }
     }
 
     /**

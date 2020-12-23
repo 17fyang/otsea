@@ -36,7 +36,7 @@ public class UserService {
 
     public static final String VERIFICATION_REDIS_KEY = "verify:%s";
 
-    public Rest<RestOutputHandle> login(String mail, String password) throws IllegalAccessException, InstantiationException {
+    public Rest<RestOutputHandle> login(String mail, String password) {
         User user = userMongoDao.selectOneByMail(mail);
         if (user == null) throw new DataContentException("找不到该用户！");
 
@@ -54,7 +54,7 @@ public class UserService {
         return new Rest<>(RestOutputHandle.pack(idComponent, userComp));
     }
 
-    public Rest<String> register(String mail, String password, String verificationCode) throws InstantiationException, IllegalAccessException {
+    public Rest<String> register(String mail, String password, String verificationCode) {
         String serverCode = redisTemplate.opsForValue().get(String.format(VERIFICATION_REDIS_KEY, mail));
         if (StringUtils.isEmpty(serverCode)) throw new StatusException("验证码已过期");
         if (!serverCode.equals(verificationCode)) throw new DataContentException("验证码不正确");

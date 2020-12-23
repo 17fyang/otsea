@@ -5,6 +5,8 @@ import com.stu.otsea.ec.common.WriteableComp;
 import com.stu.otsea.ec.component.abstractComp.Component;
 import com.stu.otsea.ec.component.handle.ComponentRegister;
 import org.bson.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 import java.util.Set;
@@ -18,6 +20,7 @@ import java.util.Set;
 
 @SuppressWarnings("all")
 public class User extends Entity {
+    public static final Logger logger = LoggerFactory.getLogger(User.class);
 
     /**
      * User对象序列化成mongodb文档
@@ -49,7 +52,7 @@ public class User extends Entity {
      * @throws IllegalAccessException
      * @throws InstantiationException
      */
-    public static User packFromMongoDocument(Document doc) throws IllegalAccessException, InstantiationException {
+    public static User packFromMongoDocument(Document doc) {
         return User.packFromEntrySet(doc.entrySet());
     }
 
@@ -61,23 +64,28 @@ public class User extends Entity {
      * @throws IllegalAccessException
      * @throws InstantiationException
      */
-    public static User packFromEntrySet(Set<Map.Entry<String, Object>> entrySet) throws IllegalAccessException, InstantiationException {
+    public static User packFromEntrySet(Set<Map.Entry<String, Object>> entrySet) {
         User user = new User();
-        for (Map.Entry<String, Object> entry : entrySet) {
-            String key = entry.getKey();
-            String value = entry.getValue().toString();
+        try {
+            for (Map.Entry<String, Object> entry : entrySet) {
+                String key = entry.getKey();
+                String value = entry.getValue().toString();
 
-            Class<? extends Component> compClass = ComponentRegister.getComp(key);
-            if (compClass != null) {
-                Component comp = compClass.newInstance();
+                Class<? extends Component> compClass = ComponentRegister.getComp(key);
+                if (compClass != null) {
+                    Component comp = compClass.newInstance();
 
-                //不处理没有实现ReadableComp的component
-                if (!(comp instanceof ReadableComp)) continue;
+                    //不处理没有实现ReadableComp的component
+                    if (!(comp instanceof ReadableComp)) continue;
 
-                ReadableComp readableComp = (ReadableComp) comp;
-                readableComp.stringToObj(value);
-                user.getComponentMap().put(compClass, comp);
+                    ReadableComp readableComp = (ReadableComp) comp;
+                    readableComp.stringToObj(value);
+                    user.getComponentMap().put(compClass, comp);
+                }
             }
+        } catch (Exception e) {
+            logger.error("error!!! fail to pack user!!!");
+            return null;
         }
         return user;
     }

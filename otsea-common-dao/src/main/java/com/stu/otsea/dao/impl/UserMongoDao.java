@@ -19,7 +19,7 @@ public class UserMongoDao {
     @Resource(name = "MongoPool")
     private IMongoClient mongoClient;
 
-    public User selectOneByMail(String mail) throws InstantiationException, IllegalAccessException {
+    public User selectOneByMail(String mail) {
         Bson mailFilter = Filters.eq("mail", mail);
         FindIterable<Document> rs = mongoClient.find(DB_NAME, COLLECTION_NAME, mailFilter);
         MongoCursor<Document> it = rs.iterator();
