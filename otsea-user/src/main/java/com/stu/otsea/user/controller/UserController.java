@@ -27,7 +27,6 @@ public class UserController {
     @ApiOperation(value = "登录接口")
     @RequestMapping("/login")
     public Rest<RestOutputHandle> login(String mail, String password) throws InstantiationException, IllegalAccessException {
-        System.out.println("aaa");
         return userService.login(mail, password);
     }
 

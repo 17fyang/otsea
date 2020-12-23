@@ -1,12 +1,11 @@
 package com.stu.otsea.user;
 
 
-import com.stu.otsea.web.redis.IJedisClient;
-import com.stu.otsea.web.redis.JedisSingleClient;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.context.annotation.Bean;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
@@ -19,18 +18,20 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableEurekaClient
 @ComponentScan(basePackages = {"com.stu.otsea"})
 public class OtseaUserServiceApplication {
+    @Autowired
+    private ApplicationContext applicationContext;
+
     public static void main(String[] args) {
         SpringApplication.run(OtseaUserServiceApplication.class, args);
     }
 
-    /**
-     * 手动声明Jedis bean
-     */
-    @Bean
-    public IJedisClient jedisClient() {
-        return new JedisSingleClient();
-//        return new JedisClusterClient();
-    }
-
+//    @Bean
+//    public String getAllBeanNames() {
+//        for (String s : applicationContext.getBeanDefinitionNames()) {
+//            if (s.toLowerCase().contains("redis"))
+//                System.out.println(s);
+//        }
+//        return "testBeanName";
+//    }
 
 }

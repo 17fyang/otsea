@@ -13,7 +13,7 @@
     <!--查询单个-->
     <select id="queryById" resultMap="CommentMap">
         select
-          target_id, target_type, user_id, content, create_time
+        target_id, target_type, user_id, content, create_time
         from otsea.comment
         where target_id = #{targetId}
     </select>
@@ -21,7 +21,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="CommentMap">
         select
-          target_id, target_type, user_id, content, create_time
+        target_id, target_type, user_id, content, create_time
         from otsea.comment
         limit #{offset}, #{limit}
     </select>

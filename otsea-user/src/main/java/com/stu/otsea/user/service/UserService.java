@@ -1,6 +1,6 @@
 package com.stu.otsea.user.service;
 
-import com.stu.otsea.dao.UserMongoDao;
+import com.stu.otsea.dao.impl.UserMongoDao;
 import com.stu.otsea.ec.component.MailComponent;
 import com.stu.otsea.ec.component.MongoIdComponent;
 import com.stu.otsea.ec.component.PasswordComponent;
@@ -33,6 +33,9 @@ public class UserService {
 
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
+
+    @Autowired
+    private RedisTemplate<String, User> userRedisTemplate;
 
 
     public static final String VERIFICATION_REDIS_KEY = "verify:%s";
@@ -72,7 +75,6 @@ public class UserService {
 
         return Rest.ok();
     }
-
 
     public Rest<String> verification(String mail) {
         String redisKey = String.format(VERIFICATION_REDIS_KEY, mail);

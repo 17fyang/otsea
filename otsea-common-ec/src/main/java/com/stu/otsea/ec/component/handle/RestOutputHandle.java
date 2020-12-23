@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.stu.otsea.ec.component.abstractComp.Component;
-import com.stu.otsea.web.util.JsonUtil;
+import com.stu.otsea.util.JsonUtil;
 
 /**
  * @author: 乌鸦坐飞机亠
@@ -27,7 +27,7 @@ public class RestOutputHandle {
         JSONObject json = new JSONObject();
         for (Component component : components) {
             String key = ComponentRegister.getKey(component.getClass());
-            
+
             JSON compJson = JsonUtil.safeParse(component.toString());
             if (compJson == null) json.put(key, component.toString());
             else json.put(key, compJson);

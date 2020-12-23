@@ -7,6 +7,7 @@ import com.stu.otsea.ec.component.handle.ComponentRegister;
 import org.bson.Document;
 
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @Author: 乌鸦坐飞机亠
@@ -49,15 +50,27 @@ public class User extends Entity {
      * @throws InstantiationException
      */
     public static User packFromMongoDocument(Document doc) throws IllegalAccessException, InstantiationException {
+        return User.packFromEntrySet(doc.entrySet());
+    }
+
+    /**
+     * entrySet 反序列化成User对象
+     *
+     * @param entrySet
+     * @return
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     */
+    public static User packFromEntrySet(Set<Map.Entry<String, Object>> entrySet) throws IllegalAccessException, InstantiationException {
         User user = new User();
-        for (Map.Entry<String, Object> entry : doc.entrySet()) {
+        for (Map.Entry<String, Object> entry : entrySet) {
             String key = entry.getKey();
             String value = entry.getValue().toString();
 
             Class<? extends Component> compClass = ComponentRegister.getComp(key);
             if (compClass != null) {
                 Component comp = compClass.newInstance();
-                
+
                 //不处理没有实现ReadableComp的component
                 if (!(comp instanceof ReadableComp)) continue;
 

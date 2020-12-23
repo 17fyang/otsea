@@ -2,7 +2,7 @@ package com.stu.otsea.user.controller;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
-import com.stu.otsea.web.mongoDB.IMongoClient;
+import com.stu.otsea.dao.IMongoClient;
 import com.stu.otsea.web.rest.Rest;
 import org.bson.Document;
 import org.springframework.web.bind.annotation.RequestMapping;

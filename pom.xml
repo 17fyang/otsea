@@ -5,11 +5,12 @@
     <modules>
         <module>otsea-common-interface</module>
         <module>otsea-common-pojo</module>
-        <module>otsea-common-web</module>
         <module>otsea-common-dao</module>
+        <module>otsea-common-ec</module>
+        <module>otsea-common-util</module>
+        <module>otsea-web</module>
         <module>otsea-user</module>
         <module>otsea-master</module>
-        <module>otsea-common-ec</module>
     </modules>
 
     <groupId>com.stu</groupId>
@@ -77,12 +78,17 @@
             </dependency>
             <dependency>
                 <groupId>com.stu</groupId>
-                <artifactId>otsea-common-web</artifactId>
+                <artifactId>otsea-web</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
             <dependency>
                 <groupId>com.stu</groupId>
                 <artifactId>otsea-common-ec</artifactId>
+                <version>1.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.stu</groupId>
+                <artifactId>otsea-common-util</artifactId>
                 <version>1.0.0-SNAPSHOT</version>
             </dependency>
 
@@ -91,6 +97,11 @@
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-core</artifactId>
                 <version>1.2.3</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.7.24</version>
             </dependency>
 
 
