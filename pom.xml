@@ -11,6 +11,7 @@
         <module>otsea-web</module>
         <module>otsea-user</module>
         <module>otsea-master</module>
+        <module>otsea_content</module>
     </modules>
 
     <groupId>com.stu</groupId>
