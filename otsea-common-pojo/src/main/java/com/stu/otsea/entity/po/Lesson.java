@@ -7,10 +7,10 @@ import java.util.Date;
  * (Lesson)实体类
  *
  * @author 乌鸦坐飞机亠
- * @since 2021-01-02 21:58:07
+ * @since 2021-01-03 14:12:21
  */
 public class Lesson implements Serializable {
-    private static final long serialVersionUID = 627903163676492866L;
+    private static final long serialVersionUID = 919555277788488623L;
     /**
      * 课程id，自增主键
      */
@@ -27,6 +27,10 @@ public class Lesson implements Serializable {
      * 课程介绍
      */
     private String introduce;
+    /**
+     * 展示图片id
+     */
+    private Integer titleImageId;
     /**
      * 课程文档结构，json格式
      */
@@ -67,6 +71,14 @@ public class Lesson implements Serializable {
 
     public void setIntroduce(String introduce) {
         this.introduce = introduce;
+    }
+
+    public Integer getTitleImageId() {
+        return titleImageId;
+    }
+
+    public void setTitleImageId(Integer titleImageId) {
+        this.titleImageId = titleImageId;
     }
 
     public String getFolderStructure() {

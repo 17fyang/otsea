@@ -1,4 +1,4 @@
-package com.stu.otsea.entity.po;
+package com.stu.otsea.dao.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -7,10 +7,10 @@ import java.util.Date;
  * (Post)实体类
  *
  * @author 乌鸦坐飞机亠
- * @since 2021-01-03 14:12:20
+ * @since 2021-01-03 14:05:11
  */
 public class Post implements Serializable {
-    private static final long serialVersionUID = -42560371221437758L;
+    private static final long serialVersionUID = -74334290715844863L;
     /**
      * 帖子id，自增主键
      */
@@ -20,17 +20,13 @@ public class Post implements Serializable {
      */
     private String authorId;
     /**
-     * 帖子标题
-     */
-    private String title;
-    /**
      * 帖子内容
      */
     private String content;
     /**
      * 帖子类型，0：文字帖，1：视频帖
      */
-    private Short postType;
+    private Object postType;
     /**
      * 资源路径，如果没有资源则为-1
      */
@@ -57,14 +53,6 @@ public class Post implements Serializable {
         this.authorId = authorId;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getContent() {
         return content;
     }
@@ -73,11 +61,11 @@ public class Post implements Serializable {
         this.content = content;
     }
 
-    public Short getPostType() {
+    public Object getPostType() {
         return postType;
     }
 
-    public void setPostType(Short postType) {
+    public void setPostType(Object postType) {
         this.postType = postType;
     }
 

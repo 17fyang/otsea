@@ -7,6 +7,7 @@
         <result property="authorId" column="author_id" jdbcType="VARCHAR"/>
         <result property="title" column="title" jdbcType="VARCHAR"/>
         <result property="introduce" column="introduce" jdbcType="VARCHAR"/>
+        <result property="titleImageId" column="title_image_id" jdbcType="INTEGER"/>
         <result property="folderStructure" column="folder_structure" jdbcType="VARCHAR"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
     </resultMap>
@@ -14,7 +15,7 @@
     <!--查询单个-->
     <select id="queryById" resultMap="LessonMap">
         select
-          lesson_id, author_id, title, introduce, folder_structure, create_time
+          lesson_id, author_id, title, introduce, title_image_id, folder_structure, create_time
         from otsea.lesson
         where lesson_id = #{lessonId}
     </select>
@@ -22,7 +23,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="LessonMap">
         select
-          lesson_id, author_id, title, introduce, folder_structure, create_time
+          lesson_id, author_id, title, introduce, title_image_id, folder_structure, create_time
         from otsea.lesson
         limit #{offset}, #{limit}
     </select>
@@ -30,7 +31,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="LessonMap">
         select
-        lesson_id, author_id, title, introduce, folder_structure, create_time
+        lesson_id, author_id, title, introduce, title_image_id, folder_structure, create_time
         from otsea.lesson
         <where>
             <if test="lessonId != null">
@@ -45,6 +46,9 @@
             <if test="introduce != null and introduce != ''">
                 and introduce = #{introduce}
             </if>
+            <if test="titleImageId != null">
+                and title_image_id = #{titleImageId}
+            </if>
             <if test="folderStructure != null and folderStructure != ''">
                 and folder_structure = #{folderStructure}
             </if>
@@ -56,27 +60,29 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="lessonId" useGeneratedKeys="true">
-        insert into otsea.lesson(author_id, title, introduce, folder_structure, create_time)
-        values (#{authorId}, #{title}, #{introduce}, #{folderStructure}, #{createTime})
+        insert into otsea.lesson(author_id, title, introduce, title_image_id, folder_structure, create_time)
+        values (#{authorId}, #{title}, #{introduce}, #{titleImageId}, #{folderStructure}, #{createTime})
     </insert>
 
     <insert id="insertBatch" keyProperty="lessonId" useGeneratedKeys="true">
-        insert into otsea.lesson(author_id, title, introduce, folder_structure, create_time)
+        insert into otsea.lesson(author_id, title, introduce, title_image_id, folder_structure, create_time)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.authorId}, #{entity.title}, #{entity.introduce}, #{entity.folderStructure}, #{entity.createTime})
+            (#{entity.authorId}, #{entity.title}, #{entity.introduce}, #{entity.titleImageId},
+            #{entity.folderStructure}, #{entity.createTime})
         </foreach>
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="lessonId" useGeneratedKeys="true">
-        insert into otsea.lesson(author_id, title, introduce, folder_structure, create_time)
+        insert into otsea.lesson(author_id, title, introduce, title_image_id, folder_structure, create_time)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.authorId}, #{entity.title}, #{entity.introduce}, #{entity.folderStructure}, #{entity.createTime})
+            (#{entity.authorId}, #{entity.title}, #{entity.introduce}, #{entity.titleImageId},
+            #{entity.folderStructure}, #{entity.createTime})
         </foreach>
         on duplicate key update
-        author_id = values(author_id) , title = values(title) , introduce = values(introduce) , folder_structure =
-        values(folder_structure) , create_time = values(create_time)
+        author_id = values(author_id) , title = values(title) , introduce = values(introduce) , title_image_id =
+        values(title_image_id) , folder_structure = values(folder_structure) , create_time = values(create_time)
     </insert>
 
     <!--通过主键修改数据-->
@@ -91,6 +97,9 @@
             </if>
             <if test="introduce != null and introduce != ''">
                 introduce = #{introduce},
+            </if>
+            <if test="titleImageId != null">
+                title_image_id = #{titleImageId},
             </if>
             <if test="folderStructure != null and folderStructure != ''">
                 folder_structure = #{folderStructure},
