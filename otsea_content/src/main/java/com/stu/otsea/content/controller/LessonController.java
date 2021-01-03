@@ -17,7 +17,7 @@ import java.util.List;
  * @Description:
  */
 @RestController
-@RequestMapping(value = "/otsea/lesson", method = {RequestMethod.POST})
+@RequestMapping(value = "/otsea/content/lesson", method = {RequestMethod.POST})
 public class LessonController {
     @Autowired
     private LessonService lessonService;
