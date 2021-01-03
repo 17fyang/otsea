@@ -1,11 +1,13 @@
 package com.stu.otsea.user;
 
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
@@ -16,7 +18,8 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @EnableEurekaClient
-@ComponentScan(basePackages = {"com.stu.otsea"})
+@MapperScan(basePackages = "com.stu.otsea.dao")
+@ComponentScan(basePackages = "com.stu.otsea")
 public class OtseaUserServiceApplication {
     @Autowired
     private ApplicationContext applicationContext;
@@ -25,13 +28,13 @@ public class OtseaUserServiceApplication {
         SpringApplication.run(OtseaUserServiceApplication.class, args);
     }
 
-//    @Bean
-//    public String getAllBeanNames() {
-//        for (String s : applicationContext.getBeanDefinitionNames()) {
-//            if (s.toLowerCase().contains("redis"))
-//                System.out.println(s);
-//        }
-//        return "testBeanName";
-//    }
+    @Bean
+    public String getAllBeanNames() {
+        for (String s : applicationContext.getBeanDefinitionNames()) {
+            if (s.toLowerCase().contains("dao"))
+                System.out.println(s);
+        }
+        return "testBeanName";
+    }
 
 }

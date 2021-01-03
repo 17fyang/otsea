@@ -1,27 +1,27 @@
 package com.stu.otsea.dao;
 
-import com.stu.otsea.entity.po.Comment;
+import com.stu.otsea.entity.po.Post;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
- * (Comment)表数据库访问层
+ * (Post)表数据库访问层
  *
  * @author 乌鸦坐飞机亠
- * @since 2020-12-07 14:48:37
+ * @since 2021-01-02 17:17:45
  */
 @Repository
-public interface CommentDao {
+public interface PostDao {
 
     /**
      * 通过ID查询单条数据
      *
-     * @param targetId 主键
+     * @param postId 主键
      * @return 实例对象
      */
-    Comment queryById(Integer targetId);
+    Post queryById(Integer postId);
 
     /**
      * 查询指定行数据
@@ -30,55 +30,55 @@ public interface CommentDao {
      * @param limit  查询条数
      * @return 对象列表
      */
-    List<Comment> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
+    List<Post> queryAllByLimit(@Param("offset") int offset, @Param("limit") int limit);
 
 
     /**
      * 通过实体作为筛选条件查询
      *
-     * @param comment 实例对象
+     * @param post 实例对象
      * @return 对象列表
      */
-    List<Comment> queryAll(Comment comment);
+    List<Post> queryAll(Post post);
 
     /**
      * 新增数据
      *
-     * @param comment 实例对象
+     * @param post 实例对象
      * @return 影响行数
      */
-    int insert(Comment comment);
+    int insert(Post post);
 
     /**
      * 批量新增数据（MyBatis原生foreach方法）
      *
-     * @param entities List<Comment> 实例对象列表
+     * @param entities List<Post> 实例对象列表
      * @return 影响行数
      */
-    int insertBatch(@Param("entities") List<Comment> entities);
+    int insertBatch(@Param("entities") List<Post> entities);
 
     /**
      * 批量新增或按主键更新数据（MyBatis原生foreach方法）
      *
-     * @param entities List<Comment> 实例对象列表
+     * @param entities List<Post> 实例对象列表
      * @return 影响行数
      */
-    int insertOrUpdateBatch(@Param("entities") List<Comment> entities);
+    int insertOrUpdateBatch(@Param("entities") List<Post> entities);
 
     /**
      * 修改数据
      *
-     * @param comment 实例对象
+     * @param post 实例对象
      * @return 影响行数
      */
-    int update(Comment comment);
+    int update(Post post);
 
     /**
      * 通过主键删除数据
      *
-     * @param targetId 主键
+     * @param postId 主键
      * @return 影响行数
      */
-    int deleteById(Integer targetId);
+    int deleteById(Integer postId);
 
 }

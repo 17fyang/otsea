@@ -6,12 +6,7 @@ import com.auth0.jwt.JWTCreator;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import org.apache.commons.codec.binary.Base64;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.security.*;
-import java.security.interfaces.RSAPrivateKey;
-import java.security.interfaces.RSAPublicKey;
 import java.util.Date;
 
 /**
@@ -20,32 +15,17 @@ import java.util.Date;
  * @Description:
  */
 public class JwtUtil {
-    private static final Logger logger = LoggerFactory.getLogger(JwtUtil.class);
-    // 签名密钥长度(bits)
-    private static final int KEY_BITS_SIZE = 1024;
     // 默认token有效期(一个小时)
     public static final long DEFAULT_TTL = 1000 * 60 * 60;
+    // 签名密钥
+    public static final String SECRET = "otsea_cofebabe";
 
-    private static Algorithm algorithm;
-    private static JWTVerifier defaultVerifier;
+    private static final Algorithm algorithm;
+    private static final JWTVerifier defaultVerifier;
 
     static {
-        try {
-            KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
-            keyPairGenerator.initialize(KEY_BITS_SIZE);
-
-            final KeyPair keyPair = keyPairGenerator.genKeyPair();
-            final PublicKey publicKey = keyPair.getPublic();
-            final PrivateKey privateKey = keyPair.getPrivate();
-
-            algorithm = Algorithm.RSA256((RSAPublicKey) publicKey, (RSAPrivateKey) privateKey);
-            defaultVerifier = JWT.require(algorithm).build();
-
-        } catch (NoSuchAlgorithmException e) {
-            logger.error("fail to init JwtUtil !!!");
-            e.printStackTrace();
-        }
-
+        algorithm = Algorithm.HMAC256(SECRET);
+        defaultVerifier = JWT.require(algorithm).build();
     }
 
     /**

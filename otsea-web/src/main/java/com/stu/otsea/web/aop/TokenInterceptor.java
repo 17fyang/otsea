@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  * @date: 2020/12/23 21:08
  * @Description: 用户登录的拦截器
  */
-public class LoginInterceptor implements HandlerInterceptor {
+public class TokenInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

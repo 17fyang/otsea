@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.stu.otsea.dao.LessonDao">
+
+    <resultMap type="com.stu.otsea.entity.po.Lesson" id="LessonMap">
+        <result property="lessonId" column="lesson_id" jdbcType="INTEGER"/>
+        <result property="authorId" column="author_id" jdbcType="VARCHAR"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="introduce" column="introduce" jdbcType="VARCHAR"/>
+        <result property="folderStructure" column="folder_structure" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="LessonMap">
+        select
+          lesson_id, author_id, title, introduce, folder_structure, create_time
+        from otsea.lesson
+        where lesson_id = #{lessonId}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="LessonMap">
+        select
+          lesson_id, author_id, title, introduce, folder_structure, create_time
+        from otsea.lesson
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="LessonMap">
+        select
+        lesson_id, author_id, title, introduce, folder_structure, create_time
+        from otsea.lesson
+        <where>
+            <if test="lessonId != null">
+                and lesson_id = #{lessonId}
+            </if>
+            <if test="authorId != null and authorId != ''">
+                and author_id = #{authorId}
+            </if>
+            <if test="title != null and title != ''">
+                and title = #{title}
+            </if>
+            <if test="introduce != null and introduce != ''">
+                and introduce = #{introduce}
+            </if>
+            <if test="folderStructure != null and folderStructure != ''">
+                and folder_structure = #{folderStructure}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="lessonId" useGeneratedKeys="true">
+        insert into otsea.lesson(author_id, title, introduce, folder_structure, create_time)
+        values (#{authorId}, #{title}, #{introduce}, #{folderStructure}, #{createTime})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="lessonId" useGeneratedKeys="true">
+        insert into otsea.lesson(author_id, title, introduce, folder_structure, create_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.authorId}, #{entity.title}, #{entity.introduce}, #{entity.folderStructure}, #{entity.createTime})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="lessonId" useGeneratedKeys="true">
+        insert into otsea.lesson(author_id, title, introduce, folder_structure, create_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.authorId}, #{entity.title}, #{entity.introduce}, #{entity.folderStructure}, #{entity.createTime})
+        </foreach>
+        on duplicate key update
+        author_id = values(author_id) , title = values(title) , introduce = values(introduce) , folder_structure =
+        values(folder_structure) , create_time = values(create_time)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update otsea.lesson
+        <set>
+            <if test="authorId != null and authorId != ''">
+                author_id = #{authorId},
+            </if>
+            <if test="title != null and title != ''">
+                title = #{title},
+            </if>
+            <if test="introduce != null and introduce != ''">
+                introduce = #{introduce},
+            </if>
+            <if test="folderStructure != null and folderStructure != ''">
+                folder_structure = #{folderStructure},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+        </set>
+        where lesson_id = #{lessonId}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from otsea.lesson where lesson_id = #{lessonId}
+    </delete>
+
+</mapper>

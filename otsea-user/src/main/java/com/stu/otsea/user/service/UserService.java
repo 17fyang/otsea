@@ -8,6 +8,8 @@ import com.stu.otsea.ec.component.UserComponent;
 import com.stu.otsea.ec.component.handle.HandleEnum;
 import com.stu.otsea.ec.component.handle.RestOutputHandle;
 import com.stu.otsea.ec.entity.User;
+import com.stu.otsea.entity.vo.LoginPassVo;
+import com.stu.otsea.util.JwtUtil;
 import com.stu.otsea.web.exception.DataContentException;
 import com.stu.otsea.web.exception.HintException;
 import com.stu.otsea.web.exception.StatusException;
@@ -36,7 +38,7 @@ public class UserService {
 
     public static final String VERIFICATION_REDIS_KEY = "verify:%s";
 
-    public Rest<RestOutputHandle> login(String mail, String password) {
+    public Rest<LoginPassVo> login(String mail, String password) {
         User user = userMongoDao.selectOneByMail(mail);
         if (user == null) throw new DataContentException("找不到该用户！");
 
@@ -48,10 +50,13 @@ public class UserService {
         MongoIdComponent idComponent = HandleEnum.MONGO_ID_HANDLE.bindComponent(user);
         this.userRedisTemplate.opsForValue().set(idComponent.get_id(), user);
 
-        //todo 签发token
-
         UserComponent userComp = HandleEnum.USER_HANDLE.bindComponent(user);
-        return new Rest<>(RestOutputHandle.pack(idComponent, userComp));
+
+        //签发token
+        String token = JwtUtil.signById(idComponent.get_id());
+
+        LoginPassVo loginPassVo = new LoginPassVo(token, RestOutputHandle.pack(idComponent, userComp));
+        return new Rest<>(loginPassVo);
     }
 
     public Rest<String> register(String mail, String password, String verificationCode) {

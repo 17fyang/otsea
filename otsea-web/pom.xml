@@ -68,6 +68,12 @@
             <artifactId>mongodb-driver</artifactId>
         </dependency>
 
+        <!-- mysql连接 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
     </dependencies>
 
 </project>
