@@ -10,7 +10,7 @@ import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
 import com.stu.otsea.dao.IMongoClient;
 import com.stu.otsea.util.ConfigUtil;
-import com.stu.otsea.util.PathUtil;
+import com.stu.otsea.util.path.AutoPathUtil;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.springframework.stereotype.Component;
@@ -20,7 +20,7 @@ public class MongoPool implements IMongoClient {
     private MongoClient mongoClient = null;
 
     private MongoPool() {
-        ConfigUtil configUtil = new ConfigUtil(PathUtil.getResourcePath("mongodb.properties"));
+        ConfigUtil configUtil = new ConfigUtil(AutoPathUtil.getInstance().getConfig("/mongodb.properties"));
         String host = configUtil.getString("mongo.host");
         int port = configUtil.getInt("mongo.port");
         int maxConn = configUtil.getInt("mongo.connect.maxNum");
