@@ -1,4 +1,4 @@
-package com.stu.otsea.entity.po;
+package com.stu.otsea.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -7,10 +7,10 @@ import java.util.Date;
  * (Resource)实体类
  *
  * @author 乌鸦坐飞机亠
- * @since 2021-01-02 17:18:37
+ * @since 2021-01-03 15:29:05
  */
 public class Resource implements Serializable {
-    private static final long serialVersionUID = -34728340189878164L;
+    private static final long serialVersionUID = -86805436642257825L;
     /**
      * 资源id，自增主键
      */
@@ -20,13 +20,13 @@ public class Resource implements Serializable {
      */
     private String resourcePath;
     /**
-     * 资源类型
+     * 资源类型，0：图片，10，视频
      */
-    private Object resourceType;
+    private Short resourceType;
     /**
      * 扩展字段，json格式
      */
-    private String infomation;
+    private String information;
     /**
      * 创建时间
      */
@@ -49,20 +49,20 @@ public class Resource implements Serializable {
         this.resourcePath = resourcePath;
     }
 
-    public Object getResourceType() {
+    public Short getResourceType() {
         return resourceType;
     }
 
-    public void setResourceType(Object resourceType) {
+    public void setResourceType(Short resourceType) {
         this.resourceType = resourceType;
     }
 
-    public String getInfomation() {
-        return infomation;
+    public String getInformation() {
+        return information;
     }
 
-    public void setInfomation(String infomation) {
-        this.infomation = infomation;
+    public void setInformation(String information) {
+        this.information = information;
     }
 
     public Date getCreateTime() {

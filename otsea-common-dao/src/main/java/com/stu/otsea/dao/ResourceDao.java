@@ -1,6 +1,6 @@
 package com.stu.otsea.dao;
 
-import com.stu.otsea.entity.po.Resource;
+import com.stu.otsea.entity.Resource;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +10,7 @@ import java.util.List;
  * (Resource)表数据库访问层
  *
  * @author 乌鸦坐飞机亠
- * @since 2021-01-02 17:17:47
+ * @since 2021-01-03 15:28:55
  */
 @Repository
 public interface ResourceDao {

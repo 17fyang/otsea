@@ -1,6 +1,6 @@
 package com.stu.otsea.dao;
 
-import com.stu.otsea.entity.po.Comment;
+import com.stu.otsea.entity.Comment;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +10,7 @@ import java.util.List;
  * (Comment)表数据库访问层
  *
  * @author 乌鸦坐飞机亠
- * @since 2020-12-07 14:48:37
+ * @since 2021-01-03 15:25:57
  */
 @Repository
 public interface CommentDao {

@@ -15,8 +15,8 @@ import java.util.Date;
  * @Description:
  */
 public class JwtUtil {
-    // 默认token有效期(一个小时)
-    public static final long DEFAULT_TTL = 1000 * 60 * 60;
+    // 默认token有效期(七天)
+    public static final long DEFAULT_TTL = 1000 * 60 * 60 * 24 * 7;
     // 签名密钥
     public static final String SECRET = "otsea_cofebabe";
 

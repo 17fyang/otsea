@@ -1,7 +1,8 @@
 package com.stu.otsea.dao;
 
-import com.stu.otsea.entity.po.Lesson;
+import com.stu.otsea.entity.Lesson;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -9,8 +10,9 @@ import java.util.List;
  * (Lesson)表数据库访问层
  *
  * @author 乌鸦坐飞机亠
- * @since 2021-01-03 14:13:00
+ * @since 2021-01-03 15:26:03
  */
+@Repository
 public interface LessonDao {
 
     /**

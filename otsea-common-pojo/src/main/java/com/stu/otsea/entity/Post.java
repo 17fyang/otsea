@@ -1,4 +1,4 @@
-package com.stu.otsea.entity.po;
+package com.stu.otsea.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -7,10 +7,10 @@ import java.util.Date;
  * (Post)实体类
  *
  * @author 乌鸦坐飞机亠
- * @since 2021-01-03 14:12:20
+ * @since 2021-01-03 15:26:37
  */
 public class Post implements Serializable {
-    private static final long serialVersionUID = -42560371221437758L;
+    private static final long serialVersionUID = -22887944946452180L;
     /**
      * 帖子id，自增主键
      */

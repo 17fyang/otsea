@@ -1,8 +1,7 @@
 package com.stu.otsea.dao;
 
-import com.stu.otsea.entity.po.LessonCollect;
+import com.stu.otsea.entity.LessonCollect;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -10,18 +9,17 @@ import java.util.List;
  * (LessonCollect)表数据库访问层
  *
  * @author 乌鸦坐飞机亠
- * @since 2021-01-02 17:41:55
+ * @since 2021-01-03 15:45:01
  */
-@Repository
 public interface LessonCollectDao {
 
     /**
-     * 通过ID查询单条数据
+     * 通过USER ID查找多条数据
      *
      * @param userId 主键
      * @return 实例对象
      */
-    LessonCollect queryById(String userId);
+    List<LessonCollect> queryListByUserId(String userId);
 
     /**
      * 查询指定行数据
@@ -79,6 +77,6 @@ public interface LessonCollectDao {
      * @param userId 主键
      * @return 影响行数
      */
-    int deleteById(String userId);
+    int deleteById(String userId, Integer lessonId);
 
 }

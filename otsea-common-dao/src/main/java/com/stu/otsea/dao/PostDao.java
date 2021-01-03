@@ -1,7 +1,8 @@
 package com.stu.otsea.dao;
 
-import com.stu.otsea.entity.po.Post;
+import com.stu.otsea.entity.Post;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -9,8 +10,9 @@ import java.util.List;
  * (Post)表数据库访问层
  *
  * @author 乌鸦坐飞机亠
- * @since 2021-01-03 14:13:03
+ * @since 2021-01-03 15:26:10
  */
+@Repository
 public interface PostDao {
 
     /**

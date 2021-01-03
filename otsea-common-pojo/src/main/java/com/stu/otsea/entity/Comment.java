@@ -1,4 +1,4 @@
-package com.stu.otsea.entity.po;
+package com.stu.otsea.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -7,10 +7,10 @@ import java.util.Date;
  * (Comment)实体类
  *
  * @author 乌鸦坐飞机亠
- * @since 2020-12-07 14:54:31
+ * @since 2021-01-03 15:26:36
  */
 public class Comment implements Serializable {
-    private static final long serialVersionUID = 565048009582919453L;
+    private static final long serialVersionUID = 166271074133077694L;
     /**
      * 资源id
      */
@@ -18,7 +18,7 @@ public class Comment implements Serializable {
     /**
      * 资源类型，0：帖子，1：课程
      */
-    private Object targetType;
+    private Short targetType;
     /**
      * 用户id，对应mongo object id
      */
@@ -41,11 +41,11 @@ public class Comment implements Serializable {
         this.targetId = targetId;
     }
 
-    public Object getTargetType() {
+    public Short getTargetType() {
         return targetType;
     }
 
-    public void setTargetType(Object targetType) {
+    public void setTargetType(Short targetType) {
         this.targetType = targetType;
     }
 

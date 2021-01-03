@@ -1,6 +1,6 @@
 package com.stu.otsea.dao;
 
-import com.stu.otsea.entity.po.Like;
+import com.stu.otsea.entity.Like;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +10,7 @@ import java.util.List;
  * (Like)表数据库访问层
  *
  * @author 乌鸦坐飞机亠
- * @since 2021-01-02 17:17:43
+ * @since 2021-01-03 15:26:08
  */
 @Repository
 public interface LikeDao {

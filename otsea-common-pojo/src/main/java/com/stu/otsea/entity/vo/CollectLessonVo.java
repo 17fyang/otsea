@@ -1,6 +1,6 @@
 package com.stu.otsea.entity.vo;
 
-import com.stu.otsea.entity.po.Lesson;
+import com.stu.otsea.entity.Lesson;
 
 import java.util.List;
 

@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.stu.otsea.dao.CommentDao">
 
-    <resultMap type="com.stu.otsea.entity.po.Comment" id="CommentMap">
+    <resultMap type="com.stu.otsea.entity.Comment" id="CommentMap">
         <result property="targetId" column="target_id" jdbcType="INTEGER"/>
-        <result property="targetType" column="target_type" jdbcType="OTHER"/>
+        <result property="targetType" column="target_type" jdbcType="INTEGER"/>
         <result property="userId" column="user_id" jdbcType="VARCHAR"/>
         <result property="content" column="content" jdbcType="VARCHAR"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
@@ -13,7 +13,7 @@
     <!--查询单个-->
     <select id="queryById" resultMap="CommentMap">
         select
-        target_id, target_type, user_id, content, create_time
+          target_id, target_type, user_id, content, create_time
         from otsea.comment
         where target_id = #{targetId}
     </select>
@@ -21,7 +21,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="CommentMap">
         select
-        target_id, target_type, user_id, content, create_time
+          target_id, target_type, user_id, content, create_time
         from otsea.comment
         limit #{offset}, #{limit}
     </select>

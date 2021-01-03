@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.stu.otsea.dao.LessonDao">
 
-    <resultMap type="com.stu.otsea.entity.po.Lesson" id="LessonMap">
+    <resultMap type="com.stu.otsea.entity.Lesson" id="LessonMap">
         <result property="lessonId" column="lesson_id" jdbcType="INTEGER"/>
         <result property="authorId" column="author_id" jdbcType="VARCHAR"/>
         <result property="title" column="title" jdbcType="VARCHAR"/>

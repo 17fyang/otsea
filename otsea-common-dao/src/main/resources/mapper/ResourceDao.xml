@@ -2,18 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.stu.otsea.dao.ResourceDao">
 
-    <resultMap type="com.stu.otsea.entity.po.Resource" id="ResourceMap">
+    <resultMap type="com.stu.otsea.entity.Resource" id="ResourceMap">
         <result property="resourceId" column="resource_id" jdbcType="INTEGER"/>
         <result property="resourcePath" column="resource_path" jdbcType="VARCHAR"/>
-        <result property="resourceType" column="resource_type" jdbcType="OTHER"/>
-        <result property="infomation" column="infomation" jdbcType="VARCHAR"/>
+        <result property="resourceType" column="resource_type" jdbcType="INTEGER"/>
+        <result property="information" column="information" jdbcType="VARCHAR"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <!--查询单个-->
     <select id="queryById" resultMap="ResourceMap">
         select
-          resource_id, resource_path, resource_type, infomation, create_time
+          resource_id, resource_path, resource_type, information, create_time
         from otsea.resource
         where resource_id = #{resourceId}
     </select>
@@ -21,7 +21,7 @@
     <!--查询指定行数据-->
     <select id="queryAllByLimit" resultMap="ResourceMap">
         select
-          resource_id, resource_path, resource_type, infomation, create_time
+          resource_id, resource_path, resource_type, information, create_time
         from otsea.resource
         limit #{offset}, #{limit}
     </select>
@@ -29,7 +29,7 @@
     <!--通过实体作为筛选条件查询-->
     <select id="queryAll" resultMap="ResourceMap">
         select
-        resource_id, resource_path, resource_type, infomation, create_time
+        resource_id, resource_path, resource_type, information, create_time
         from otsea.resource
         <where>
             <if test="resourceId != null">
@@ -41,8 +41,8 @@
             <if test="resourceType != null">
                 and resource_type = #{resourceType}
             </if>
-            <if test="infomation != null and infomation != ''">
-                and infomation = #{infomation}
+            <if test="information != null and information != ''">
+                and information = #{information}
             </if>
             <if test="createTime != null">
                 and create_time = #{createTime}
@@ -52,27 +52,27 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="resourceId" useGeneratedKeys="true">
-        insert into otsea.resource(resource_path, resource_type, infomation, create_time)
-        values (#{resourcePath}, #{resourceType}, #{infomation}, #{createTime})
+        insert into otsea.resource(resource_path, resource_type, information, create_time)
+        values (#{resourcePath}, #{resourceType}, #{information}, #{createTime})
     </insert>
 
     <insert id="insertBatch" keyProperty="resourceId" useGeneratedKeys="true">
-        insert into otsea.resource(resource_path, resource_type, infomation, create_time)
+        insert into otsea.resource(resource_path, resource_type, information, create_time)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.resourcePath}, #{entity.resourceType}, #{entity.infomation}, #{entity.createTime})
+            (#{entity.resourcePath}, #{entity.resourceType}, #{entity.information}, #{entity.createTime})
         </foreach>
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="resourceId" useGeneratedKeys="true">
-        insert into otsea.resource(resource_path, resource_type, infomation, create_time)
+        insert into otsea.resource(resource_path, resource_type, information, create_time)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.resourcePath}, #{entity.resourceType}, #{entity.infomation}, #{entity.createTime})
+            (#{entity.resourcePath}, #{entity.resourceType}, #{entity.information}, #{entity.createTime})
         </foreach>
         on duplicate key update
-        resource_path = values(resource_path) , resource_type = values(resource_type) , infomation = values(infomation)
-        , create_time = values(create_time)
+        resource_path = values(resource_path) , resource_type = values(resource_type) , information =
+        values(information) , create_time = values(create_time)
     </insert>
 
     <!--通过主键修改数据-->
@@ -85,8 +85,8 @@
             <if test="resourceType != null">
                 resource_type = #{resourceType},
             </if>
-            <if test="infomation != null and infomation != ''">
-                infomation = #{infomation},
+            <if test="information != null and information != ''">
+                information = #{information},
             </if>
             <if test="createTime != null">
                 create_time = #{createTime},

@@ -1,7 +1,7 @@
 package com.stu.otsea.content.controller;
 
 import com.stu.otsea.content.service.LessonService;
-import com.stu.otsea.entity.po.Lesson;
+import com.stu.otsea.entity.vo.LessonInfoVo;
 import com.stu.otsea.web.aop.Token;
 import com.stu.otsea.web.rest.Rest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +24,14 @@ public class LessonController {
 
     @Token
     @RequestMapping("/myLessons")
-    public Rest<List<Lesson>> listMyLessons(String id) {
+    public Rest<List<LessonInfoVo>> listMyLessons(String id) {
         // todo 这里应该是限制本人访问的接口，考虑在token中加入该功能
         return lessonService.listMyLessons(id);
     }
 
     @Token
     @RequestMapping("myCollectLessons")
-    public Rest<List<Lesson>> listMyCollectLessons(String id) {
+    public Rest<List<LessonInfoVo>> listMyCollectLessons(String id) {
         return lessonService.listMyCollectLessons(id);
     }
 }

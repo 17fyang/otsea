@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.stu.otsea.dao.LessonCollectDao">
 
-    <resultMap type="com.stu.otsea.entity.po.LessonCollect" id="LessonCollectMap">
+    <resultMap type="com.stu.otsea.entity.LessonCollect" id="LessonCollectMap">
         <result property="userId" column="user_id" jdbcType="VARCHAR"/>
         <result property="lessonId" column="lesson_id" jdbcType="INTEGER"/>
         <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
-    <!--查询单个-->
-    <select id="queryById" resultMap="LessonCollectMap">
+    <!--查询多个-->
+    <select id="queryListByUserId" resultMap="LessonCollectMap">
         select
           user_id, lesson_id, create_time
         from otsea.lesson_collect
@@ -44,35 +44,32 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="userId" useGeneratedKeys="true">
-        insert into otsea.lesson_collect(lesson_id, create_time)
-        values (#{lessonId}, #{createTime})
+        insert into otsea.lesson_collect(create_time)
+        values (#{createTime})
     </insert>
 
     <insert id="insertBatch" keyProperty="userId" useGeneratedKeys="true">
-        insert into otsea.lesson_collect(lesson_id, create_time)
+        insert into otsea.lesson_collect(create_time)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.lessonId}, #{entity.createTime})
+            (#{entity.createTime})
         </foreach>
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="userId" useGeneratedKeys="true">
-        insert into otsea.lesson_collect(lesson_id, create_time)
+        insert into otsea.lesson_collect(create_time)
         values
         <foreach collection="entities" item="entity" separator=",">
-            (#{entity.lessonId}, #{entity.createTime})
+            (#{entity.createTime})
         </foreach>
         on duplicate key update
-        lesson_id = values(lesson_id) , create_time = values(create_time)
+        create_time = values(create_time)
     </insert>
 
     <!--通过主键修改数据-->
     <update id="update">
         update otsea.lesson_collect
         <set>
-            <if test="lessonId != null">
-                lesson_id = #{lessonId},
-            </if>
             <if test="createTime != null">
                 create_time = #{createTime},
             </if>
@@ -82,7 +79,7 @@
 
     <!--通过主键删除-->
     <delete id="deleteById">
-        delete from otsea.lesson_collect where user_id = #{userId}
+        delete from otsea.lesson_collect where user_id = #{userId} and lesson_id = #{lessonId}
     </delete>
 
 </mapper>

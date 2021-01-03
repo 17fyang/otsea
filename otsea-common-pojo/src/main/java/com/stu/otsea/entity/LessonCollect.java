@@ -1,4 +1,4 @@
-package com.stu.otsea.entity.po;
+package com.stu.otsea.entity;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -7,10 +7,10 @@ import java.util.Date;
  * (LessonCollect)实体类
  *
  * @author 乌鸦坐飞机亠
- * @since 2021-01-02 17:44:11
+ * @since 2021-01-03 15:26:36
  */
 public class LessonCollect implements Serializable {
-    private static final long serialVersionUID = -56608557535551612L;
+    private static final long serialVersionUID = -32997435574742705L;
     /**
      * 用户id
      */
