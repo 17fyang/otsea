@@ -5,7 +5,7 @@ import com.stu.otsea.ec.component.MailComponent;
 import com.stu.otsea.ec.component.MongoIdComponent;
 import com.stu.otsea.ec.component.PasswordComponent;
 import com.stu.otsea.ec.component.UserComponent;
-import com.stu.otsea.ec.component.handle.HandleEnum;
+import com.stu.otsea.ec.component.handle.HandleFactory;
 import com.stu.otsea.ec.component.handle.RestOutputHandle;
 import com.stu.otsea.ec.entity.User;
 import com.stu.otsea.entity.vo.LoginPassVo;
@@ -49,13 +49,13 @@ public class UserService {
         User user = userMongoDao.selectOneByMail(mail);
         if (user == null) throw new DataContentException("找不到该用户！");
 
-        PasswordComponent passwordComponent = HandleEnum.PASSWORD_HANDLE.bindComponent(user);
+        PasswordComponent passwordComponent = HandleFactory.PASSWORD_HANDLE.bindComponent(user);
         if (passwordComponent == null || !passwordComponent.getPassword().equals(password))
             throw new DataContentException("密码错误，请重新输入！");
 
         //设置对象redis缓存
-        UserComponent userComp = HandleEnum.USER_HANDLE.bindComponent(user);
-        MongoIdComponent idComponent = HandleEnum.MONGO_ID_HANDLE.bindComponent(user);
+        UserComponent userComp = HandleFactory.USER_HANDLE.bindComponent(user);
+        MongoIdComponent idComponent = HandleFactory.MONGO_ID_HANDLE.bindComponent(user);
         this.userRedisTemplate.opsForValue().set(idComponent.get_id(), user);
 
         //签发token
@@ -82,11 +82,11 @@ public class UserService {
         if (user != null) throw new StatusException("该用户已存在！");
 
         user = new User();
-        MailComponent mailComp = HandleEnum.MAIL_HANDLE.bindComponent(user);
+        MailComponent mailComp = HandleFactory.MAIL_HANDLE.bindComponent(user);
         mailComp.setMail(mail);
-        UserComponent userComp = HandleEnum.USER_HANDLE.bindComponent(user);
+        UserComponent userComp = HandleFactory.USER_HANDLE.bindComponent(user);
         userComp.initComp();
-        PasswordComponent passwordComp = HandleEnum.PASSWORD_HANDLE.bindComponent(user);
+        PasswordComponent passwordComp = HandleFactory.PASSWORD_HANDLE.bindComponent(user);
         passwordComp.setPassword(password);
         userMongoDao.insertOne(user);
 
@@ -136,8 +136,8 @@ public class UserService {
     public RestOutputHandle getUserInfoVoByUser(User user) {
         if (user == null) return null;
 
-        MongoIdComponent idComponent = HandleEnum.MONGO_ID_HANDLE.bindComponent(user);
-        UserComponent userComponent = HandleEnum.USER_HANDLE.bindComponent(user);
+        MongoIdComponent idComponent = HandleFactory.MONGO_ID_HANDLE.bindComponent(user);
+        UserComponent userComponent = HandleFactory.USER_HANDLE.bindComponent(user);
         return RestOutputHandle.pack(idComponent, userComponent);
     }
 }

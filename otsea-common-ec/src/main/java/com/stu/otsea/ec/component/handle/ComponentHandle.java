@@ -5,9 +5,6 @@ import com.stu.otsea.ec.entity.Entity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * @Author: 乌鸦坐飞机亠
  * @CreateDate: 2020/11/12 16:51
@@ -18,26 +15,20 @@ import java.util.Map;
 public class ComponentHandle<T extends Component> {
     private static Logger logger = LoggerFactory.getLogger(ComponentHandle.class);
     private final Class<T> compClass;
-    private static final Map<Class, ComponentHandle> CACHE_MAP = new HashMap<>();
 
     private ComponentHandle(Class<T> compClass) {
         this.compClass = compClass;
     }
 
     /**
-     * 构建一个handle，优先在缓存池里查
+     * 构建一个handle
      *
      * @param clazz
      * @param <T>
      * @return
      */
     public static <T extends Component> ComponentHandle<T> buildHandle(Class<T> clazz) {
-        ComponentHandle<T> handle = CACHE_MAP.get(clazz);
-        if (handle != null) return handle;
-
         ComponentHandle<T> newHanle = new ComponentHandle<T>(clazz);
-        CACHE_MAP.put(clazz, newHanle);
-        if (CACHE_MAP.size() > 100) logger.warn("component handle cache map size is too big !!");
         return newHanle;
     }
 

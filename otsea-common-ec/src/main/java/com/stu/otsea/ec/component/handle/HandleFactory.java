@@ -12,7 +12,7 @@ import com.stu.otsea.ec.component.UserComponent;
  * 建议新增完一个component之后在这里写一个handle静态类
  * @since JDK 1.8
  */
-public class HandleEnum {
+public class HandleFactory {
     public static final ComponentHandle<UserComponent> USER_HANDLE = ComponentHandle.buildHandle(UserComponent.class);
     public static final ComponentHandle<PasswordComponent> PASSWORD_HANDLE = ComponentHandle.buildHandle(PasswordComponent.class);
     public static final ComponentHandle<MongoIdComponent> MONGO_ID_HANDLE = ComponentHandle.buildHandle(MongoIdComponent.class);
