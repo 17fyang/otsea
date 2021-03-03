@@ -1,4 +1,4 @@
-package com.stu.otsea.entity;
+package com.stu.otsea.entity.po;
 
 import java.io.Serializable;
 import java.util.Date;

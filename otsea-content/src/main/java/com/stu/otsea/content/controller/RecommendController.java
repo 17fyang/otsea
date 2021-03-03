@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description:
  */
 @RestController
-@RequestMapping(value = "/otsea/content/recommend", method = RequestMethod.POST)
+@RequestMapping(value = "/otsea/content/recommend", method = {RequestMethod.POST, RequestMethod.GET})
 public class RecommendController {
     @Autowired
     private RecommendService recommendService;

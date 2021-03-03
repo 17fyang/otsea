@@ -1,19 +1,22 @@
 package com.stu.otsea.user.service;
 
+import com.stu.otsea.api.service.IUserService;
 import com.stu.otsea.dao.impl.UserMongoDao;
 import com.stu.otsea.ec.component.MailComponent;
 import com.stu.otsea.ec.component.MongoIdComponent;
 import com.stu.otsea.ec.component.PasswordComponent;
 import com.stu.otsea.ec.component.UserComponent;
 import com.stu.otsea.ec.component.handle.HandleFactory;
-import com.stu.otsea.ec.component.handle.RestOutputHandle;
 import com.stu.otsea.ec.entity.User;
 import com.stu.otsea.entity.vo.LoginPassVo;
+import com.stu.otsea.entity.vo.UserInfoVo;
+import com.stu.otsea.user.ec.UserVoHandler;
 import com.stu.otsea.util.JwtUtil;
 import com.stu.otsea.web.exception.DataContentException;
 import com.stu.otsea.web.exception.HintException;
 import com.stu.otsea.web.exception.StatusException;
 import com.stu.otsea.web.rest.Rest;
+import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -26,7 +29,9 @@ import org.springframework.util.StringUtils;
  * @Description:
  */
 @Component
-public class UserService {
+
+@Service(interfaceClass = IUserService.class)
+public class UserService implements IUserService {
     @Autowired
     private UserMongoDao userMongoDao;
 
@@ -61,7 +66,8 @@ public class UserService {
         //签发token
         String token = JwtUtil.signById(idComponent.get_id());
 
-        LoginPassVo loginPassVo = new LoginPassVo(token, RestOutputHandle.pack(idComponent, userComp));
+        UserVoHandler voHandler = new UserVoHandler(user);
+        LoginPassVo loginPassVo = new LoginPassVo(token, voHandler.toIntroduce());
         return new Rest<>(loginPassVo);
     }
 
@@ -118,7 +124,8 @@ public class UserService {
      * @param userId
      * @return
      */
-    public RestOutputHandle getUserInfoVoById(String userId) {
+    public UserInfoVo getUserInfoVoById(String userId) {
+        System.out.println("visit user");
         User user = userRedisTemplate.opsForValue().get(userId);
         // todo 缓存中没找到应该到db中再找一遍
         if (user != null) {
@@ -133,11 +140,9 @@ public class UserService {
      * @param user
      * @return
      */
-    public RestOutputHandle getUserInfoVoByUser(User user) {
+    public UserInfoVo getUserInfoVoByUser(User user) {
         if (user == null) return null;
 
-        MongoIdComponent idComponent = HandleFactory.MONGO_ID_HANDLE.bindComponent(user);
-        UserComponent userComponent = HandleFactory.USER_HANDLE.bindComponent(user);
-        return RestOutputHandle.pack(idComponent, userComponent);
+        return new UserVoHandler(user).toIntroduce();
     }
 }

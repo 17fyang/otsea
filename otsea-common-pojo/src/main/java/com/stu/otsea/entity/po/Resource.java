@@ -1,4 +1,7 @@
-package com.stu.otsea.entity;
+package com.stu.otsea.entity.po;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,6 +17,7 @@ public class Resource implements Serializable {
     /**
      * 资源id，自增主键
      */
+    @TableId(type = IdType.AUTO)
     private Integer resourceId;
     /**
      * 资源路径

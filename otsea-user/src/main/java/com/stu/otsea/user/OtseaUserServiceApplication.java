@@ -7,7 +7,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
@@ -26,15 +25,6 @@ public class OtseaUserServiceApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(OtseaUserServiceApplication.class, args);
-    }
-
-    @Bean
-    public String getAllBeanNames() {
-        for (String s : applicationContext.getBeanDefinitionNames()) {
-            if (s.toLowerCase().contains("dao"))
-                System.out.println(s);
-        }
-        return "testBeanName";
     }
 
 }

@@ -1,7 +1,7 @@
 package com.stu.otsea.entity.vo;
 
-import com.stu.otsea.entity.Lesson;
-import com.stu.otsea.entity.Resource;
+import com.stu.otsea.entity.po.Lesson;
+import com.stu.otsea.entity.po.Resource;
 
 /**
  * @author: 乌鸦坐飞机亠
@@ -11,7 +11,7 @@ import com.stu.otsea.entity.Resource;
 public class LessonInfoVo {
     private Lesson lesson;
     private Resource resource;
-    private Object authorInfo;
+    private UserInfoVo userInfoVo;
 
 
     public Lesson getLesson() {
@@ -30,11 +30,11 @@ public class LessonInfoVo {
         this.resource = resource;
     }
 
-    public Object getAuthorInfo() {
-        return authorInfo;
+    public UserInfoVo getUserInfoVo() {
+        return userInfoVo;
     }
 
-    public void setAuthorInfo(Object authorInfo) {
-        this.authorInfo = authorInfo;
+    public void setUserInfoVo(UserInfoVo userInfoVo) {
+        this.userInfoVo = userInfoVo;
     }
 }

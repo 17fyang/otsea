@@ -1,11 +1,12 @@
 package com.stu.otsea.content.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.stu.otsea.dao.LessonCollectDao;
 import com.stu.otsea.dao.LessonDao;
 import com.stu.otsea.dao.ResourceDao;
-import com.stu.otsea.entity.Lesson;
-import com.stu.otsea.entity.LessonCollect;
-import com.stu.otsea.entity.Resource;
+import com.stu.otsea.entity.po.Lesson;
+import com.stu.otsea.entity.po.LessonCollect;
+import com.stu.otsea.entity.po.Resource;
 import com.stu.otsea.entity.vo.LessonInfoVo;
 import com.stu.otsea.web.rest.Rest;
 import org.slf4j.Logger;
@@ -42,9 +43,10 @@ public class LessonService {
      * @return
      */
     public Rest<List<LessonInfoVo>> listMyLessons(String id) {
-        Lesson queryLesson = new Lesson();
-        queryLesson.setAuthorId(id);
-        List<Lesson> lessons = lessonDao.queryAll(queryLesson);
+        QueryWrapper<Lesson> lessonQueryWrapper = new QueryWrapper<>();
+        lessonQueryWrapper.eq("authorId", id);
+
+        List<Lesson> lessons = lessonDao.selectList(lessonQueryWrapper);
 
         List<LessonInfoVo> lessonInfoVoList = new LinkedList<>();
         for (Lesson lesson : lessons) {
@@ -62,7 +64,9 @@ public class LessonService {
      * @return
      */
     public Rest<List<LessonInfoVo>> listMyCollectLessons(String id) {
-        List<LessonCollect> collectList = lessonCollectDao.queryListByUserId(id);
+        QueryWrapper<LessonCollect> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("userId", id);
+        List<LessonCollect> collectList = lessonCollectDao.selectList(queryWrapper);
 
         List<LessonInfoVo> list = new LinkedList<>();
         for (LessonCollect lc : collectList) {
@@ -78,7 +82,7 @@ public class LessonService {
      * @return
      */
     public LessonInfoVo getLessonInfoVoById(int lessonId) {
-        Lesson lesson = lessonDao.queryById(lessonId);
+        Lesson lesson = lessonDao.selectById(lessonId);
         return this.getLessonInVoByLesson(lesson);
     }
 
@@ -91,7 +95,7 @@ public class LessonService {
     public LessonInfoVo getLessonInVoByLesson(Lesson lesson) {
         LessonInfoVo lessonInfoVo = new LessonInfoVo();
         lessonInfoVo.setLesson(lesson);
-        Resource titleImage = resourceDao.queryById(lesson.getTitleImageId());
+        Resource titleImage = resourceDao.selectById(lesson.getTitleImageId());
         lessonInfoVo.setResource(titleImage);
         return lessonInfoVo;
     }

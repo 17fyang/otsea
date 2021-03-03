@@ -1,4 +1,7 @@
-package com.stu.otsea.entity;
+package com.stu.otsea.entity.po;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -14,6 +17,7 @@ public class Post implements Serializable {
     /**
      * 帖子id，自增主键
      */
+    @TableId(type = IdType.AUTO)
     private Integer postId;
     /**
      * 作者id，对应mongo object id

@@ -1,7 +1,8 @@
 package com.stu.otsea.ec.entity;
 
+import com.stu.otsea.ec.common.JsonWriteableComp;
 import com.stu.otsea.ec.common.ReadableComp;
-import com.stu.otsea.ec.common.WriteableComp;
+import com.stu.otsea.ec.common.StringWriteableComp;
 import com.stu.otsea.ec.component.abstractComp.Component;
 import com.stu.otsea.ec.component.handle.ComponentRegister;
 import org.bson.Document;
@@ -35,10 +36,14 @@ public class User extends Entity {
 
         for (Map.Entry<Class<? extends Component>, Component> entry : componentMap.entrySet()) {
             Component comp = entry.getValue();
-            if (comp instanceof WriteableComp) {
-                WriteableComp writeableComp = (WriteableComp) comp;
-                String key = ComponentRegister.getKey(entry.getKey());
+            String key = ComponentRegister.getKey(entry.getKey());
+
+            if (comp instanceof StringWriteableComp) {
+                StringWriteableComp writeableComp = (StringWriteableComp) comp;
                 doc.put(key, writeableComp.objToString());
+            } else if (comp instanceof JsonWriteableComp) {
+                JsonWriteableComp writeableComp = (JsonWriteableComp) comp;
+                doc.put(key, writeableComp.objToJson());
             }
         }
         return doc;

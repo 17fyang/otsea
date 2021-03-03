@@ -14,7 +14,7 @@ import com.stu.otsea.util.JsonUtil;
 public class RestOutputHandle {
     private Component[] components;
 
-    RestOutputHandle(Component[] components) {
+    public RestOutputHandle(Component[] components) {
         this.components = components;
     }
 

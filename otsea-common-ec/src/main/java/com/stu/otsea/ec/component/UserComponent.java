@@ -2,7 +2,7 @@ package com.stu.otsea.ec.component;
 
 import com.alibaba.fastjson.JSONObject;
 import com.stu.otsea.ec.common.InitializeComp;
-import com.stu.otsea.ec.component.abstractComp.OutputComponent;
+import com.stu.otsea.ec.component.abstractComp.JsonSerializableComp;
 import com.stu.otsea.ec.enumreation.SexEnum;
 
 /**
@@ -11,7 +11,7 @@ import com.stu.otsea.ec.enumreation.SexEnum;
  * @Version: 1.0
  * @Description:
  */
-public class UserComponent extends OutputComponent implements InitializeComp {
+public class UserComponent extends JsonSerializableComp implements InitializeComp {
     private String name;
     private SexEnum sex;
     private String signature;
@@ -27,10 +27,10 @@ public class UserComponent extends OutputComponent implements InitializeComp {
     }
 
     @Override
-    public String objToString() {
-        JSONObject json = (JSONObject) JSONObject.toJSON(this);
-        return json.toJSONString();
+    public JSONObject objToJson() {
+        return (JSONObject) JSONObject.toJSON(this);
     }
+    
 
     @Override
     public void initComp() {
@@ -63,4 +63,6 @@ public class UserComponent extends OutputComponent implements InitializeComp {
     public void setHeadImage(String headImage) {
         this.headImage = headImage;
     }
+
+
 }

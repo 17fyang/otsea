@@ -1,6 +1,6 @@
 package com.stu.otsea.ec.component;
 
-import com.stu.otsea.ec.component.abstractComp.OutputComponent;
+import com.stu.otsea.ec.component.abstractComp.StringSerializableComp;
 
 /**
  * @author: 乌鸦坐飞机亠
@@ -8,7 +8,7 @@ import com.stu.otsea.ec.component.abstractComp.OutputComponent;
  * @Description:
  * @since JDK 1.8
  */
-public class PasswordComponent extends OutputComponent {
+public class PasswordComponent extends StringSerializableComp {
     private String password;
 
     @Override

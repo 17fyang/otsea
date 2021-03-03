@@ -1,8 +1,13 @@
 package com.stu.otsea.content.controller;
 
+import com.stu.otsea.content.service.PostService;
+import com.stu.otsea.entity.vo.PostInfoVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @author: 乌鸦坐飞机亠
@@ -10,7 +15,19 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description:
  */
 @RestController
-@RequestMapping(value = "/otsea/content/post", method = RequestMethod.POST)
+@RequestMapping(value = "/otsea/content/post", method = {RequestMethod.POST, RequestMethod.GET})
 public class PostController {
-    
+
+    @Autowired
+    private PostService postService;
+
+    @RequestMapping("/listAction")
+    public List<PostInfoVo> listAction() {
+        return postService.listPost();
+    }
+
+    @RequestMapping("/detail")
+    public PostInfoVo detailAction(int postId) {
+        return postService.getPostInfoVoById(postId);
+    }
 }

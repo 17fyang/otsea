@@ -1,5 +1,6 @@
 package com.stu.otsea.ec.component;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.stu.otsea.ec.common.ReadableComp;
 import com.stu.otsea.ec.component.abstractComp.Component;
 
@@ -22,6 +23,7 @@ public class MongoIdComponent extends Component implements ReadableComp {
     }
 
     @Override
+    @JsonValue
     public String toString() {
         return _id;
     }

@@ -40,6 +40,12 @@
             <artifactId>otsea-web</artifactId>
         </dependency>
 
+        <!-- 本地interface模块 -->
+        <dependency>
+            <groupId>com.stu</groupId>
+            <artifactId>otsea-common-interface</artifactId>
+        </dependency>
+
         <!-- fastJson -->
         <dependency>
             <groupId>com.alibaba</groupId>

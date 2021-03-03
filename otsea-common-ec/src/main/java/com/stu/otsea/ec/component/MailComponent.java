@@ -1,13 +1,13 @@
 package com.stu.otsea.ec.component;
 
-import com.stu.otsea.ec.component.abstractComp.OutputComponent;
+import com.stu.otsea.ec.component.abstractComp.StringSerializableComp;
 
 /**
  * @author: 乌鸦坐飞机亠
  * @date: 2020/12/3 16:26
  * @Description:
  */
-public class MailComponent extends OutputComponent {
+public class MailComponent extends StringSerializableComp {
     private String mail;
 
     @Override

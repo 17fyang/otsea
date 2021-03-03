@@ -1,5 +1,7 @@
 package com.stu.otsea.ec.common;
 
-public interface ReadableComp {
+import java.io.Serializable;
+
+public interface ReadableComp extends Serializable {
     void stringToObj(String s);
 }

@@ -1,6 +1,6 @@
 package com.stu.otsea.api.service;
 
-import com.stu.otsea.ec.component.handle.RestOutputHandle;
+import com.stu.otsea.entity.vo.UserInfoVo;
 
 /**
  * @author: 乌鸦坐飞机亠
@@ -15,5 +15,5 @@ public interface IUserService {
      * @param userId
      * @return
      */
-    RestOutputHandle getUserInfoVoById(String userId);
+    UserInfoVo getUserInfoVoById(String userId);
 }

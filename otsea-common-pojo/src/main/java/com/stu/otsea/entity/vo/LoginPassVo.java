@@ -7,11 +7,11 @@ package com.stu.otsea.entity.vo;
  */
 public class LoginPassVo {
     private String token;
-    private Object restOutputHandle;
+    private UserInfoVo userInfoVo;
 
-    public LoginPassVo(String token, Object restOutputHandle) {
+    public LoginPassVo(String token, UserInfoVo userInfoVo) {
         this.token = token;
-        this.restOutputHandle = restOutputHandle;
+        this.userInfoVo = userInfoVo;
     }
 
     public String getToken() {
@@ -22,11 +22,11 @@ public class LoginPassVo {
         this.token = token;
     }
 
-    public Object getRestOutputHandle() {
-        return restOutputHandle;
+    public UserInfoVo getUserInfoVo() {
+        return userInfoVo;
     }
 
-    public void setRestOutputHandle(Object restOutputHandle) {
-        this.restOutputHandle = restOutputHandle;
+    public void setUserInfoVo(UserInfoVo userInfoVo) {
+        this.userInfoVo = userInfoVo;
     }
 }
