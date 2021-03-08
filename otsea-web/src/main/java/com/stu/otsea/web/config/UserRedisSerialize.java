@@ -1,7 +1,11 @@
 package com.stu.otsea.web.config;
 
 import com.alibaba.fastjson.JSONObject;
+import com.stu.otsea.ec.component.MongoIdComponent;
+import com.stu.otsea.ec.component.handle.HandleFactory;
 import com.stu.otsea.ec.entity.User;
+import com.stu.otsea.ec.enumreation.CompEnum;
+import org.bson.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.serializer.RedisSerializer;
@@ -18,7 +22,10 @@ public class UserRedisSerialize implements RedisSerializer<User> {
     @Override
     public byte[] serialize(User user) throws SerializationException {
         if (user == null) return null;
-        return user.toMongoDocument().toJson().getBytes();
+        MongoIdComponent idComponent = HandleFactory.MONGO_ID_HANDLE.bindComponent(user);
+        Document doc = user.toMongoDocument();
+        doc.append(CompEnum.MONGO_ID, idComponent.get_id());
+        return doc.toJson().getBytes();
     }
 
     @Override

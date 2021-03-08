@@ -63,7 +63,7 @@ public class LessonService {
      * @param id
      * @return
      */
-    public Rest<List<LessonInfoVo>> listMyCollectLessons(String id) {
+    public List<LessonInfoVo> listMyCollectLessons(String id) {
         QueryWrapper<LessonCollect> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("userId", id);
         List<LessonCollect> collectList = lessonCollectDao.selectList(queryWrapper);
@@ -73,7 +73,7 @@ public class LessonService {
             LessonInfoVo lessonInfoVo = this.getLessonInfoVoById(lc.getLessonId());
             list.add(lessonInfoVo);
         }
-        return new Rest<>(list);
+        return list;
     }
 
     /**
@@ -98,5 +98,14 @@ public class LessonService {
         Resource titleImage = resourceDao.selectById(lesson.getTitleImageId());
         lessonInfoVo.setResource(titleImage);
         return lessonInfoVo;
+    }
+
+    /**
+     * 获取推荐的课程列表
+     *
+     * @return
+     */
+    public List<LessonInfoVo> listAction() {
+        return null;
     }
 }

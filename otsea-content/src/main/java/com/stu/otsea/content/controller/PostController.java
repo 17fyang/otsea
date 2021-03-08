@@ -2,6 +2,7 @@ package com.stu.otsea.content.controller;
 
 import com.stu.otsea.content.service.PostService;
 import com.stu.otsea.entity.vo.PostInfoVo;
+import com.stu.otsea.web.rest.Rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,8 +23,8 @@ public class PostController {
     private PostService postService;
 
     @RequestMapping("/listAction")
-    public List<PostInfoVo> listAction() {
-        return postService.listPost();
+    public Rest<List<PostInfoVo>> listAction() {
+        return new Rest<>(postService.listPost());
     }
 
     @RequestMapping("/detail")

@@ -32,6 +32,10 @@ public class LessonController {
     @Token
     @RequestMapping("myCollectLessons")
     public Rest<List<LessonInfoVo>> listMyCollectLessons(String id) {
-        return lessonService.listMyCollectLessons(id);
+        return new Rest<>(lessonService.listMyCollectLessons(id));
+    }
+
+    public Rest<List<LessonInfoVo>> listAction() {
+        return new Rest<>(lessonService.listAction());
     }
 }

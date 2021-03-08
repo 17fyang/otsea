@@ -13,11 +13,19 @@ import java.io.Serializable;
 public class UserInfoVo implements Serializable {
 
     private MongoIdComponent userId;
-    private UserComponent userInfo;
+    private UserComponent userBaseInfo;
 
-    public UserInfoVo(MongoIdComponent userId, UserComponent userInfo) {
+    public UserInfoVo(MongoIdComponent userId, UserComponent userBaseInfo) {
         this.userId = userId;
-        this.userInfo = userInfo;
+        this.userBaseInfo = userBaseInfo;
+    }
+
+    @Override
+    public String toString() {
+        return "UserInfoVo{" +
+                "userId=" + userId +
+                ", userBaseInfo=" + userBaseInfo +
+                '}';
     }
 
     public MongoIdComponent getUserId() {
@@ -28,11 +36,11 @@ public class UserInfoVo implements Serializable {
         this.userId = userId;
     }
 
-    public UserComponent getUserInfo() {
-        return userInfo;
+    public UserComponent getUserBaseInfo() {
+        return userBaseInfo;
     }
 
-    public void setUserInfo(UserComponent userInfo) {
-        this.userInfo = userInfo;
+    public void setUserBaseInfo(UserComponent userBaseInfo) {
+        this.userBaseInfo = userBaseInfo;
     }
 }

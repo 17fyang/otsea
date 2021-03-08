@@ -11,7 +11,7 @@ import com.stu.otsea.entity.po.Resource;
 public class LessonInfoVo {
     private Lesson lesson;
     private Resource resource;
-    private UserInfoVo userInfoVo;
+    private UserInfoVo authorInfo;
 
 
     public Lesson getLesson() {
@@ -30,11 +30,11 @@ public class LessonInfoVo {
         this.resource = resource;
     }
 
-    public UserInfoVo getUserInfoVo() {
-        return userInfoVo;
+    public UserInfoVo getAuthorInfo() {
+        return authorInfo;
     }
 
-    public void setUserInfoVo(UserInfoVo userInfoVo) {
-        this.userInfoVo = userInfoVo;
+    public void setAuthorInfo(UserInfoVo authorInfo) {
+        this.authorInfo = authorInfo;
     }
 }

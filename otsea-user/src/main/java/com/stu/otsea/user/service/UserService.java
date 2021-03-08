@@ -125,7 +125,6 @@ public class UserService implements IUserService {
      * @return
      */
     public UserInfoVo getUserInfoVoById(String userId) {
-        System.out.println("visit user");
         User user = userRedisTemplate.opsForValue().get(userId);
         // todo 缓存中没找到应该到db中再找一遍
         if (user != null) {
