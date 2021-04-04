@@ -1,5 +1,6 @@
 package com.stu.otsea.ec.component.handle;
 
+import com.stu.otsea.ec.common.InitializeComp;
 import com.stu.otsea.ec.component.abstractComp.Component;
 import com.stu.otsea.ec.entity.Entity;
 import org.slf4j.Logger;
@@ -46,6 +47,11 @@ public class ComponentHandle<T extends Component> {
         T compInstance = null;
         try {
             compInstance = compClass.newInstance();
+
+            //初始化Component
+            if (compInstance instanceof InitializeComp)
+                ((InitializeComp) compInstance).initComp();
+
             entity.getComponentMap().put(this.compClass, compInstance);
             return compInstance;
         } catch (ReflectiveOperationException e) {

@@ -2,10 +2,7 @@ package com.stu.otsea.user.service;
 
 import com.stu.otsea.api.service.IUserService;
 import com.stu.otsea.dao.impl.UserMongoDao;
-import com.stu.otsea.ec.component.MailComponent;
-import com.stu.otsea.ec.component.MongoIdComponent;
-import com.stu.otsea.ec.component.PasswordComponent;
-import com.stu.otsea.ec.component.UserComponent;
+import com.stu.otsea.ec.component.*;
 import com.stu.otsea.ec.component.handle.HandleFactory;
 import com.stu.otsea.ec.entity.User;
 import com.stu.otsea.entity.vo.LoginPassVo;
@@ -22,6 +19,9 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
+
 /**
  * @Author: 乌鸦坐飞机亠
  * @CreateDate: 2020/11/12 14:14
@@ -32,6 +32,7 @@ import org.springframework.util.StringUtils;
 
 @Service(interfaceClass = IUserService.class)
 public class UserService implements IUserService {
+    public static final int USER_KEY_EXPIRE = 3;
     @Autowired
     private UserMongoDao userMongoDao;
 
@@ -59,9 +60,8 @@ public class UserService implements IUserService {
             throw new DataContentException("密码错误，请重新输入！");
 
         //设置对象redis缓存
-        UserComponent userComp = HandleFactory.USER_HANDLE.bindComponent(user);
         MongoIdComponent idComponent = HandleFactory.MONGO_ID_HANDLE.bindComponent(user);
-        this.userRedisTemplate.opsForValue().set(idComponent.get_id(), user);
+        this.userRedisTemplate.opsForValue().set(idComponent.get_id(), user, USER_KEY_EXPIRE, TimeUnit.HOURS);
 
         //签发token
         String token = JwtUtil.signById(idComponent.get_id());
@@ -90,8 +90,7 @@ public class UserService implements IUserService {
         user = new User();
         MailComponent mailComp = HandleFactory.MAIL_HANDLE.bindComponent(user);
         mailComp.setMail(mail);
-        UserComponent userComp = HandleFactory.USER_HANDLE.bindComponent(user);
-        userComp.initComp();
+
         PasswordComponent passwordComp = HandleFactory.PASSWORD_HANDLE.bindComponent(user);
         passwordComp.setPassword(password);
         userMongoDao.insertOne(user);
@@ -126,11 +125,18 @@ public class UserService implements IUserService {
      */
     public UserInfoVo getUserInfoVoById(String userId) {
         User user = userRedisTemplate.opsForValue().get(userId);
-        // todo 缓存中没找到应该到db中再找一遍
-        if (user != null) {
-            return getUserInfoVoByUser(user);
+
+        if (user == null) {
+            user = userMongoDao.selectOneById(userId);
+
+            if (user == null) return null;
+
+            MongoIdComponent idComponent = HandleFactory.MONGO_ID_HANDLE.bindComponent(user);
+            userRedisTemplate.opsForValue().set(idComponent.get_id(), user, USER_KEY_EXPIRE, TimeUnit.HOURS);
         }
-        return null;
+
+        return getUserInfoVoByUser(user);
+
     }
 
     /**
@@ -143,5 +149,47 @@ public class UserService implements IUserService {
         if (user == null) return null;
 
         return new UserVoHandler(user).toIntroduce();
+    }
+
+    /**
+     * 插入一个用户数据，返回主键
+     * 用于爬虫程序
+     *
+     * @param name
+     * @param intro
+     * @param imageUrl
+     * @return
+     */
+    public String insertUser(String name, String intro, String imageUrl) {
+        User exitUser = userMongoDao.selectOneByName(name);
+        if (exitUser != null) {
+            MongoIdComponent idComponent = HandleFactory.MONGO_ID_HANDLE.bindComponent(exitUser);
+            return idComponent.get_id();
+        }
+
+        String mail = UUID.randomUUID().toString() + "@stu.edu.cn";
+        String password = "123456";
+
+        User user = new User();
+        MailComponent mailComp = HandleFactory.MAIL_HANDLE.bindComponent(user);
+        mailComp.setMail(mail);
+
+        NameComponent nameComponent = HandleFactory.NAME_HANDLE.bindComponent(user);
+        nameComponent.setName(name);
+
+        IntroComponent introComponent = HandleFactory.INTRO_HANDLE.bindComponent(user);
+        introComponent.setIntro(intro);
+
+        HeadImageComponent headImageComponent = HandleFactory.HEAD_IMAGE.bindComponent(user);
+        headImageComponent.setHeadImage(imageUrl);
+
+        PasswordComponent passwordComp = HandleFactory.PASSWORD_HANDLE.bindComponent(user);
+        passwordComp.setPassword(password);
+
+        userMongoDao.insertOne(user);
+
+        User newUser = userMongoDao.selectOneByMail(mail);
+        MongoIdComponent idComponent = HandleFactory.MONGO_ID_HANDLE.bindComponent(newUser);
+        return idComponent.get_id();
     }
 }

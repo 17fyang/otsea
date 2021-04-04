@@ -1,6 +1,5 @@
 package com.stu.otsea.web.aop;
 
-import com.alibaba.fastjson.JSONObject;
 import com.stu.otsea.util.JwtUtil;
 import com.stu.otsea.web.exception.StatusException;
 import org.springframework.web.method.HandlerMethod;
@@ -16,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class TokenInterceptor implements HandlerInterceptor {
 
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Token annotation = null;
@@ -25,10 +25,17 @@ public class TokenInterceptor implements HandlerInterceptor {
 
         if (annotation != null) {
             String token = request.getHeader("token");
-            JSONObject payload = JwtUtil.verify(token);
-            if (payload == null) throw new StatusException("用户未登录");
+            String id = JwtUtil.verifyId(token);
+            if (id == null) throw new StatusException("用户未登录");
+
+            IdThreadLocal.INSTANCE.set(id);
         }
 
         return true;
+    }
+
+    @Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        IdThreadLocal.INSTANCE.remove();
     }
 }

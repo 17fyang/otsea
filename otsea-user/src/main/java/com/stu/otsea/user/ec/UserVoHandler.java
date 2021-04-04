@@ -1,7 +1,9 @@
 package com.stu.otsea.user.ec;
 
+import com.stu.otsea.ec.component.HeadImageComponent;
+import com.stu.otsea.ec.component.IntroComponent;
 import com.stu.otsea.ec.component.MongoIdComponent;
-import com.stu.otsea.ec.component.UserComponent;
+import com.stu.otsea.ec.component.NameComponent;
 import com.stu.otsea.ec.component.handle.HandleFactory;
 import com.stu.otsea.ec.entity.User;
 import com.stu.otsea.entity.vo.UserInfoVo;
@@ -26,8 +28,10 @@ public class UserVoHandler {
      */
     public UserInfoVo toIntroduce() {
         MongoIdComponent idComponent = HandleFactory.MONGO_ID_HANDLE.bindComponent(user);
-        UserComponent userComponent = HandleFactory.USER_HANDLE.bindComponent(user);
-        return new UserInfoVo(idComponent, userComponent);
+        NameComponent nameComponent = HandleFactory.NAME_HANDLE.bindComponent(user);
+        IntroComponent introComponent = HandleFactory.INTRO_HANDLE.bindComponent(user);
+        HeadImageComponent headImageComponent = HandleFactory.HEAD_IMAGE.bindComponent(user);
+        return new UserInfoVo(idComponent, nameComponent, introComponent, headImageComponent);
     }
 
 }

@@ -10,7 +10,7 @@ import com.stu.otsea.entity.po.Resource;
  */
 public class LessonInfoVo {
     private Lesson lesson;
-    private Resource resource;
+    private Resource titleImage;
     private UserInfoVo authorInfo;
 
 
@@ -22,12 +22,12 @@ public class LessonInfoVo {
         this.lesson = lesson;
     }
 
-    public Resource getResource() {
-        return resource;
+    public Resource getTitleImage() {
+        return titleImage;
     }
 
-    public void setResource(Resource resource) {
-        this.resource = resource;
+    public void setTitleImage(Resource titleImage) {
+        this.titleImage = titleImage;
     }
 
     public UserInfoVo getAuthorInfo() {

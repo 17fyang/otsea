@@ -1,9 +1,6 @@
 package com.stu.otsea.ec.component.handle;
 
-import com.stu.otsea.ec.component.MailComponent;
-import com.stu.otsea.ec.component.MongoIdComponent;
-import com.stu.otsea.ec.component.PasswordComponent;
-import com.stu.otsea.ec.component.UserComponent;
+import com.stu.otsea.ec.component.*;
 
 /**
  * @author: 乌鸦坐飞机亠
@@ -13,9 +10,10 @@ import com.stu.otsea.ec.component.UserComponent;
  * @since JDK 1.8
  */
 public class HandleFactory {
-    public static final ComponentHandle<UserComponent> USER_HANDLE = ComponentHandle.buildHandle(UserComponent.class);
     public static final ComponentHandle<PasswordComponent> PASSWORD_HANDLE = ComponentHandle.buildHandle(PasswordComponent.class);
     public static final ComponentHandle<MongoIdComponent> MONGO_ID_HANDLE = ComponentHandle.buildHandle(MongoIdComponent.class);
     public static final ComponentHandle<MailComponent> MAIL_HANDLE = ComponentHandle.buildHandle(MailComponent.class);
-
+    public static final ComponentHandle<HeadImageComponent> HEAD_IMAGE = ComponentHandle.buildHandle(HeadImageComponent.class);
+    public static final ComponentHandle<IntroComponent> INTRO_HANDLE = ComponentHandle.buildHandle(IntroComponent.class);
+    public static final ComponentHandle<NameComponent> NAME_HANDLE = ComponentHandle.buildHandle(NameComponent.class);
 }

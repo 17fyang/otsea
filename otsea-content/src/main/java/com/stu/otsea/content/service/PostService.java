@@ -2,7 +2,6 @@ package com.stu.otsea.content.service;
 
 import com.stu.otsea.api.service.IUserService;
 import com.stu.otsea.dao.PostDao;
-import com.stu.otsea.dao.ResourceDao;
 import com.stu.otsea.entity.po.Post;
 import com.stu.otsea.entity.vo.PostInfoVo;
 import com.stu.otsea.entity.vo.UserInfoVo;
@@ -22,9 +21,7 @@ import java.util.List;
 public class PostService {
     @Autowired
     private PostDao postDao;
-
-    @Autowired
-    private ResourceDao resourceDao;
+    
 
     @Reference
     private IUserService userService;
@@ -50,6 +47,7 @@ public class PostService {
         postInfoVo.setPost(post);
         UserInfoVo authorInfo = userService.getUserInfoVoById(post.getAuthorId());
         postInfoVo.setAuthorInfo(authorInfo);
+        post.setAuthorId(null);
         return postInfoVo;
     }
 

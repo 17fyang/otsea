@@ -41,4 +41,9 @@ public class UserController {
     public Rest<String> verification(String mail) {
         return userService.verification(mail);
     }
+
+    @RequestMapping("/insertUser")
+    public Rest<String> insertUser(String name, String intro, String imageUrl) {
+        return new Rest<>(userService.insertUser(name, intro, imageUrl));
+    }
 }

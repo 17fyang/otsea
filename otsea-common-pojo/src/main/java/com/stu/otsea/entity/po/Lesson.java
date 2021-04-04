@@ -1,5 +1,8 @@
 package com.stu.otsea.entity.po;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,6 +17,7 @@ public class Lesson implements Serializable {
     /**
      * 课程id，自增主键
      */
+    @TableId(type = IdType.AUTO)
     private Integer lessonId;
     /**
      * 用户作者id，对应mongo object id

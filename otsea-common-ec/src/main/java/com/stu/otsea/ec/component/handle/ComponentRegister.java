@@ -1,9 +1,6 @@
 package com.stu.otsea.ec.component.handle;
 
-import com.stu.otsea.ec.component.MailComponent;
-import com.stu.otsea.ec.component.MongoIdComponent;
-import com.stu.otsea.ec.component.PasswordComponent;
-import com.stu.otsea.ec.component.UserComponent;
+import com.stu.otsea.ec.component.*;
 import com.stu.otsea.ec.component.abstractComp.Component;
 import com.stu.otsea.ec.enumreation.CompEnum;
 
@@ -23,7 +20,9 @@ public class ComponentRegister {
 
     static {
         //在这里统一注册component，也可以调用registerComponent方法注册
-        registerComponent(CompEnum.USER_COMP, UserComponent.class);
+        registerComponent(CompEnum.NAME, NameComponent.class);
+        registerComponent(CompEnum.INTRO, IntroComponent.class);
+        registerComponent(CompEnum.HEAD_IMAGE, HeadImageComponent.class);
         registerComponent(CompEnum.PASSWORD_COMP, PasswordComponent.class);
         registerComponent(CompEnum.MONGO_ID, MongoIdComponent.class);
         registerComponent(CompEnum.MAIL, MailComponent.class);

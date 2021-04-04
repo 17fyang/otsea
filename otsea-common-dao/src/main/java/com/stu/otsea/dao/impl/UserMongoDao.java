@@ -7,6 +7,7 @@ import com.stu.otsea.dao.IMongoClient;
 import com.stu.otsea.ec.entity.User;
 import org.bson.Document;
 import org.bson.conversions.Bson;
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -23,6 +24,24 @@ public class UserMongoDao {
         Bson mailFilter = Filters.eq("mail", mail);
         FindIterable<Document> rs = mongoClient.find(DB_NAME, COLLECTION_NAME, mailFilter);
         MongoCursor<Document> it = rs.iterator();
+        if (!it.hasNext()) return null;
+        return User.packFromMongoDocument(it.next());
+    }
+
+    public User selectOneByName(String name) {
+        Bson nameFilter = Filters.eq("name", name);
+        FindIterable<Document> rs = mongoClient.find(DB_NAME, COLLECTION_NAME, nameFilter);
+        MongoCursor<Document> it = rs.iterator();
+
+        if (!it.hasNext()) return null;
+        return User.packFromMongoDocument(it.next());
+    }
+
+    public User selectOneById(String id) {
+        Bson nameFilter = Filters.eq("_id", new ObjectId(id));
+        FindIterable<Document> rs = mongoClient.find(DB_NAME, COLLECTION_NAME, nameFilter);
+        MongoCursor<Document> it = rs.iterator();
+
         if (!it.hasNext()) return null;
         return User.packFromMongoDocument(it.next());
     }

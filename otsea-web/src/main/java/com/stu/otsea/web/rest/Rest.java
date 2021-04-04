@@ -27,6 +27,11 @@ public class Rest<T> {
         return new Rest<>(RestCode.SUCCEED, "");
     }
 
+    public static Rest<String> fail() {
+        return new Rest<>(RestCode.UNKNOWN, "");
+    }
+
+
     private void packRest(RestCode code, String msg, T data) {
         this.code = code;
         this.msg = msg;

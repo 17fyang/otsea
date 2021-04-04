@@ -1,7 +1,9 @@
 package com.stu.otsea.entity.vo;
 
+import com.stu.otsea.ec.component.HeadImageComponent;
+import com.stu.otsea.ec.component.IntroComponent;
 import com.stu.otsea.ec.component.MongoIdComponent;
-import com.stu.otsea.ec.component.UserComponent;
+import com.stu.otsea.ec.component.NameComponent;
 
 import java.io.Serializable;
 
@@ -13,19 +15,15 @@ import java.io.Serializable;
 public class UserInfoVo implements Serializable {
 
     private MongoIdComponent userId;
-    private UserComponent userBaseInfo;
+    private NameComponent name;
+    private IntroComponent intro;
+    private HeadImageComponent headImage;
 
-    public UserInfoVo(MongoIdComponent userId, UserComponent userBaseInfo) {
+    public UserInfoVo(MongoIdComponent userId, NameComponent name, IntroComponent intro, HeadImageComponent headImage) {
         this.userId = userId;
-        this.userBaseInfo = userBaseInfo;
-    }
-
-    @Override
-    public String toString() {
-        return "UserInfoVo{" +
-                "userId=" + userId +
-                ", userBaseInfo=" + userBaseInfo +
-                '}';
+        this.name = name;
+        this.intro = intro;
+        this.headImage = headImage;
     }
 
     public MongoIdComponent getUserId() {
@@ -36,11 +34,27 @@ public class UserInfoVo implements Serializable {
         this.userId = userId;
     }
 
-    public UserComponent getUserBaseInfo() {
-        return userBaseInfo;
+    public NameComponent getName() {
+        return name;
     }
 
-    public void setUserBaseInfo(UserComponent userBaseInfo) {
-        this.userBaseInfo = userBaseInfo;
+    public void setName(NameComponent name) {
+        this.name = name;
+    }
+
+    public IntroComponent getIntro() {
+        return intro;
+    }
+
+    public void setIntro(IntroComponent intro) {
+        this.intro = intro;
+    }
+
+    public HeadImageComponent getHeadImage() {
+        return headImage;
+    }
+
+    public void setHeadImage(HeadImageComponent headImage) {
+        this.headImage = headImage;
     }
 }
